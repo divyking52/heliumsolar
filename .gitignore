@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+.DS_Store
+*.log
+.env*
+.env*.local
+*.tsbuildinfo
+helium-solar.zip
+.vercel
+
+public/videos/helium-founder.mp4
+*.mp4.bak

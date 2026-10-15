@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Helium Solar — Solar Company In Kanpur, UP | Since 2012</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --solar: #ffec88;
+    --brand: #0b4f9c;
+    --ink: #0e0e0e;
+    --muted: #555555;
+    --stone: #0b4f9c;
+    --clay: #0d3d74;
+    --dusk: #123a5f;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scrollbar-width: thin;
+    overflow-x: clip;
+    scroll-behavior: auto;
+  }
+
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button, input, textarea { font: inherit; }
+
+  .logo {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    height: 44px;
+  }
+  .logo img { height: 100%; width: auto; transition: opacity .4s ease; }
+
+  /* HERO */
+  #hero { position: relative; height: 520vh; }
+  .hero-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .hero-yellow {
+    position: absolute;
+    inset: 0;
+    background: var(--solar);
+    opacity: 0;
+  }
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    transform-origin: center;
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-glow {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 42%;
+    background: radial-gradient(ellipse at top, rgba(11,79,156,.35), transparent 68%);
+    pointer-events: none;
+  }
+  .hero-shade {
+    position: absolute;
+    inset: auto 0 0;
+    height: 160px;
+    background: linear-gradient(to top, rgba(0,0,0,.45), transparent);
+  }
+  .orbit-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .orbit-tile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    object-fit: cover;
+    box-shadow: 0 18px 40px rgba(0,0,0,.12);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .hero-h1 {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 36px;
+    z-index: 20;
+    max-width: 920px;
+    font-size: clamp(27px, 3.2vw, 38px);
+    font-weight: 600;
+    letter-spacing: -0.065em;
+    line-height: 1;
+    color: #fff;
+  }
+  .hero-h1 span { display: block; }
+  .hero-h1 .dim { color: rgba(255,255,255,.85); }
+
+  .statement-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .statement-card {
+    max-width: 920px;
+    width: min(920px, 100%);
+    padding: clamp(20px, 3vw, 36px) clamp(22px, 3.5vw, 44px);
+    border-radius: 18px;
+    background: rgba(255, 252, 235, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 20px 60px rgba(14,14,14,.08);
+    border: 1px solid rgba(14,14,14,.06);
+  }
+  .statement {
+    text-align: center;
+    font-family: "Plus Jakarta Sans", Inter, sans-serif;
+    font-size: clamp(18px, 2.6vw, 34px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .statement .word {
+    display: inline-block;
+    opacity: .22;
+    transition: none;
+  }
+
+  .final-line {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    font-family: "Plus Jakarta Sans", Inter, sans-serif;
+    font-size: clamp(28px, 5vw, 64px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    color: var(--ink);
+    opacity: 0;
+  }
+
+  /* ABOUT */
+  #spacer-grid { position: relative; height: 420vh; background: #fff; }
+  .about-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  .about-card {
+    position: relative;
+    width: min(520px, calc(100vw - 48px));
+    aspect-ratio: 1 / 1;
+    border: 1px solid #000;
+    background: #fff;
+    overflow: hidden;
+    transition: border-color .35s ease, box-shadow .35s ease;
+  }
+  .about-card.photo-mode {
+    border-color: transparent !important;
+    box-shadow: none;
+    background: transparent;
+  }
+  .about-card.photo-mode .about-fill,
+  .about-card.photo-mode .about-stage {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+  .about-fill {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 34%;
+    background: var(--solar);
+  }
+  .about-stage {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    padding: 32px 28px;
+    opacity: 0;
+  }
+  .about-stage.one { display: flex; flex-direction: column; justify-content: flex-end; opacity: 1; }
+  .about-stage.two { padding-top: 80px; }
+  .about-stage p {
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.18;
+  }
+  .about-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center center;
+    background: transparent;
+    opacity: 0;
+  }
+
+  /* FOUNDER */
+  #founder { position: relative; height: 240vh; background: #fff; }
+  .founder-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #171717;
+  }
+  .founder-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+    pointer-events: none;
+    background: #171717;
+  }
+  .founder-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.15), rgba(0,0,0,.2));
+  }
+  .founder-copy {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    left: 20px;
+    max-width: 380px;
+    z-index: 5;
+  }
+  @media (min-width: 640px) {
+    .founder-copy { left: auto; }
+  }
+  .founder-quote {
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+  .founder-quote .word {
+    display: inline-block;
+    opacity: .28;
+  }
+  .founder-label {
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  /* MARQUEE */
+  #marquee { background: #fff; padding: 80px 0; }
+  .section-pad { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
+  .marquee-title {
+    font-size: clamp(28px, 3vw, 34px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+  }
+  .marquee-row { overflow: hidden; margin-bottom: 16px; }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 16px;
+  }
+  .marquee-track.left { animation: marquee-left 42s linear infinite; }
+  .marquee-track.right { animation: marquee-right 46s linear infinite; }
+  .partner-card {
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0,.05);
+    background: #fff;
+    padding: 16px;
+    transition: transform .5s ease;
+  }
+  .partner-card:hover { transform: scale(1.04); }
+  .partner-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  @keyframes marquee-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+
+  /* SHOWCASE */
+  #visual-showcase { background: #fff; padding: 96px 0; }
+  .showcase-eyebrow {
+    max-width: 360px;
+    font-size: 14px;
+    line-height: 1.15;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+  .showcase-frame {
+    position: relative;
+    width: min(100%, 636px);
+    aspect-ratio: 16 / 9;
+    margin-bottom: 32px;
+  }
+  .showcase-glow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.12);
+    opacity: .45;
+    filter: blur(36px);
+    pointer-events: none;
+  }
+  .showcase-figure {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #f5f5f5;
+    box-shadow: 0 30px 80px rgba(0,0,0,.08);
+    transform: scale(.92);
+  }
+  .showcase-figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .showcase-headline {
+    max-width: 1100px;
+    font-size: clamp(34px, 5vw, 64px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: .95;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .showcase-body {
+    max-width: 520px;
+    font-size: 14px;
+    line-height: 1.15;
+    color: var(--muted);
+  }
+
+  /* PILLARS */
+  #pillars { background: #fff; }
+  .pillar {
+    color: #fff;
+    border-top: 1px solid rgba(255,255,255,.15);
+    padding: 80px 40px;
+  }
+  .pillar.stone { background: var(--stone); }
+  .pillar.clay { background: var(--clay); }
+  .pillar.dusk { background: var(--dusk); }
+  .pillar-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    gap: 32px;
+  }
+  @media (min-width: 1024px) {
+    .pillar-inner {
+      grid-template-columns: 7fr 5fr;
+      align-items: end;
+    }
+  }
+  .pillar h1 {
+    font-size: clamp(64px, 8vw, 96px);
+    font-weight: 400;
+    letter-spacing: -0.09em;
+    line-height: 1;
+  }
+  .pillar .label {
+    font-size: 14px;
+    line-height: 1.1;
+    color: rgba(255,255,255,.8);
+  }
+  .pillar .body {
+    margin-top: 12px;
+    max-width: 640px;
+    font-size: clamp(18px, 1.6vw, 20px);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  /* CLOSING */
+  #closing-vision {
+    background: #fff;
+    padding: 112px 40px;
+  }
+  .closing-title {
+    max-width: 420px;
+    font-size: clamp(36px, 4vw, 44px);
+    font-weight: 500;
+    letter-spacing: -0.036em;
+    line-height: 1;
+    white-space: pre-line;
+  }
+  .closing-body {
+    margin-top: 24px;
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--muted);
+  }
+  .closing-contact {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .closing-contact a:hover { color: var(--brand); }
+
+  form { margin-top: 56px; max-width: 720px; }
+  label {
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    padding: 16px 0;
+  }
+  label span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  label span.upper { text-transform: uppercase; }
+  input, textarea {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    resize: none;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(0,0,0,.3); }
+  .submit {
+    margin-top: 32px;
+    border: 0;
+    background: none;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    color: var(--brand);
+    cursor: pointer;
+  }
+  .submit:hover { opacity: .6; }
+
+  footer {
+    background: #fff;
+    padding: 24px 40px 40px;
+  }
+  .footer-logo {
+    display: block;
+    width: min(720px, 100%);
+    margin: 0 auto;
+    height: auto;
+  }
+  .footer-address {
+    margin: 24px auto 0;
+    max-width: 720px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .footer-bar {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: rgba(14,14,14,.7);
+  }
+  .footer-bar a:hover { opacity: .6; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track.left, .marquee-track.right { animation: none; }
+  }
+</style>
+</head>
+<body>
+  <a class="logo" href="#top" aria-label="Helium Solar" id="logoLink">
+    <img id="logoImg" src="https://www.heliumsolar.in/Content/assets/My-image/logo-white.png" alt="Helium Solar" />
+  </a>
+
+  <main id="top">
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-sticky">
+        <div class="hero-yellow" id="heroYellow"></div>
+        <div class="hero-photo" id="heroPhoto">
+          <img src="https://www.heliumsolar.in/UploadDoc/slider/20260618102251_0.jpeg" alt="" />
+          <div class="hero-glow" id="heroGlow"></div>
+          <div class="hero-shade"></div>
+        </div>
+        <div class="orbit-layer" id="orbitLayer"></div>
+        <h1 class="hero-h1" id="heroH1">
+          <span>India’s trusted solar EPC.</span>
+          <span class="dim">High-performance solar for homes, businesses, and industry since 2012.</span>
+        </h1>
+        <div class="statement-wrap" id="statementWrap">
+          <div class="statement-card">
+            <p class="statement" id="statement"></p>
+          </div>
+        </div>
+        <h2 class="final-line" id="finalLine">Solar for everyone.</h2>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="spacer-grid">
+      <div class="about-sticky">
+        <div class="about-card" id="aboutCard">
+          <div class="about-fill" id="aboutFill"></div>
+          <div class="about-stage one" id="aboutOne">
+            <p>Energy demand keeps rising.</p>
+            <p>Businesses need cleaner,</p>
+            <p>dependable power every day.</p>
+          </div>
+          <div class="about-stage two" id="aboutTwo">
+            <p>Going solar is no longer</p>
+            <p>a future idea.</p>
+            <p>It’s how Indian homes</p>
+            <p>and factories cut costs</p>
+            <p>and stay resilient.</p>
+          </div>
+          <img class="about-photo" id="aboutPhoto" src="images/helium-circle.png" alt="Helium Solar — Solar For Every One" />
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDER / VIDEO -->
+    <section id="founder">
+      <div class="founder-sticky">
+        <video
+          id="founderVideo"
+          class="founder-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster="https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Installation.jpg"
+        >
+          <source src="videos/helium-loop.mp4" type="video/mp4" />
+        </video>
+        <div class="founder-shade"></div>
+        <div class="founder-copy">
+          <p class="founder-quote" id="founderQuote"></p>
+          <h2 class="founder-label">Since 2012</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="marquee">
+      <div class="section-pad">
+        <p class="marquee-title">PARTNERS</p>
+      </div>
+      <div class="marquee-row">
+        <div class="marquee-track left" id="row1"></div>
+      </div>
+      <div class="marquee-row">
+        <div class="marquee-track right" id="row2"></div>
+      </div>
+    </section>
+
+    <!-- SHOWCASE -->
+    <section id="visual-showcase">
+      <div class="section-pad">
+        <p class="showcase-eyebrow">Better solar starts with better engineering. Built to turn more sunlight into dependable energy.</p>
+        <div class="showcase-frame" id="showcaseFrame">
+          <img class="showcase-glow" aria-hidden="true" src="https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Installation.jpg" alt="" />
+          <figure class="showcase-figure" id="showcaseFigure">
+            <img src="https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Installation.jpg" alt="Helium Solar installation" />
+          </figure>
+        </div>
+        <h2 class="showcase-headline">Rooftop to MW solar farms — proven installations powering India</h2>
+        <p class="showcase-body">From residential rooftops to industrial plants for NTPC, JSW, Blue Dart, and more — Helium Solar delivers end-to-end EPC.</p>
+      </div>
+    </section>
+
+    <!-- PILLARS -->
+    <section id="pillars">
+      <article class="pillar stone">
+        <div class="pillar-inner">
+          <h1>Savings</h1>
+          <div>
+            <p class="label">Impressive ROI</p>
+            <p class="body">Efficient solar power solutions designed for maximum savings and significant reductions in electricity bills.</p>
+          </div>
+        </div>
+      </article>
+      <article class="pillar clay">
+        <div class="pillar-inner">
+          <h1>Support</h1>
+          <div>
+            <p class="label">End-to-End EPC</p>
+            <p class="body">Site surveys, system design, installation, documentation, and long-term O&M from one trusted Kanpur-based partner.</p>
+          </div>
+        </div>
+      </article>
+      <article class="pillar dusk">
+        <div class="pillar-inner">
+          <h1>Reliability</h1>
+          <div>
+            <p class="label">Built to Perform</p>
+            <p class="body">Premium-grade components and professional maintenance for uninterrupted, dependable solar power year after year.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CLOSING -->
+    <section id="closing-vision">
+      <p class="closing-title">More Sun.
+More Savings.</p>
+      <p class="closing-body">Getting solar for your home, commercial space, or industrial facility is easier than ever. Connect with Helium Solar for a free site survey and start saving with clean energy.</p>
+      <p class="closing-contact">
+        <a href="tel:+919194700477">+91 9194700477</a> ·
+        <a href="mailto:sales@heliumsolar.in">sales@heliumsolar.in</a>
+      </p>
+      <form id="contactForm">
+        <label>
+          <span>Name</span>
+          <input name="name" required placeholder="Your name" />
+        </label>
+        <label>
+          <span class="upper">Email</span>
+          <input name="email" type="email" required placeholder="you@company.com" />
+        </label>
+        <label>
+          <span class="upper">Message</span>
+          <textarea name="message" rows="3" required placeholder="Tell us about your site or energy needs..."></textarea>
+        </label>
+        <button class="submit" type="submit">SUBMIT</button>
+      </form>
+    </section>
+
+    <footer>
+      <img class="footer-logo" src="https://www.heliumsolar.in/UploadDoc/company/20251203025137_0.png" alt="Helium Solar" />
+      <p class="footer-address">Helium Tower, Plot No 16, Amritpuram, New Azad Nagar, Kanpur, UP</p>
+      <div class="footer-bar">
+        <a href="https://www.heliumsolar.in" target="_blank" rel="noreferrer">©2026 Helium Solar</a>
+        <a href="#top" id="backTop">Back to top</a>
+      </div>
+    </footer>
+  </main>
+
+<script>
+(function () {
+  const ASSETS = {
+    logo: "https://www.heliumsolar.in/UploadDoc/company/20251203025137_0.png",
+    logoWhite: "https://www.heliumsolar.in/Content/assets/My-image/logo-white.png",
+    tiles: [
+      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Residential%20Solar%20Solutions.jpg",
+      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Commercial%20Solar%20Solutions.jpg",
+      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Industrial%20Solar%20Solutions.jpg",
+      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Atta%20Chakki.jpg",
+      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Kits.jpg",
+      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20O&M%20Asset%20Management.jpg",
+      "https://www.heliumsolar.in/Content/assets/My-image/img4.jpg",
+      "https://www.heliumsolar.in/Content/assets/My-image/img1.jpg",
+      "https://www.heliumsolar.in/Content/assets/My-image/img2.jpg",
+      "https://www.heliumsolar.in/UploadDoc/product/20251207021244_0.jpeg",
+      "https://www.heliumsolar.in/UploadDoc/product/20251207020910_0.jpeg",
+      "https://www.heliumsolar.in/UploadDoc/product/20251207021414_0.jpeg"
+    ],
+    partners: [
+      "https://www.heliumsolar.in/UploadDoc/partner/20251129043314_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251018170448_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251018170421_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251018170355_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251018170332_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251018165142_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251018165345_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251018165459_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251128224248_0.png",
+      "https://www.heliumsolar.in/UploadDoc/partner/20251018170148_0.png"
+    ]
+  };
+
+  const SIZES = [
+    [210,148],[176,124],[196,138],[158,112],[188,132],[168,118],
+    [200,140],[150,108],[182,128],[164,116],[192,136],[170,120]
+  ];
+
+  const STATEMENT = "We’re delivering rooftop, commercial, and industrial solar across India—built for savings, reliability, and long-term performance.";
+  const FOUNDER = "At Helium Solar, we provide end-to-end solar installation focused on efficiency, savings, and long-term performance for homes, businesses, and industry.";
+
+  /* ---------- helpers ---------- */
+  function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+  function map(v, a, b, c, d) {
+    if (a === b) return c;
+    const t = clamp((v - a) / (b - a), 0, 1);
+    return c + (d - c) * t;
+  }
+  function sectionProgress(el) {
+    const rect = el.getBoundingClientRect();
+    const total = el.offsetHeight - window.innerHeight;
+    if (total <= 0) return 0;
+    return clamp(-rect.top / total, 0, 1);
+  }
+  function wrapWords(el, text) {
+    el.innerHTML = text.split(/\s+/).map(function (w) {
+      return '<span class="word">' + w + '</span>';
+    }).join(' ');
+    return el.querySelectorAll('.word');
+  }
+
+  /* ---------- native scroll (reliable) ---------- */
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.getElementById('backTop').addEventListener('click', function (e) {
+    e.preventDefault();
+    scrollToTop();
+  });
+  document.getElementById('logoLink').addEventListener('click', function (e) {
+    e.preventDefault();
+    scrollToTop();
+  });
+
+  /* ---------- build orbit tiles ---------- */
+  const orbitLayer = document.getElementById('orbitLayer');
+  const tiles = ASSETS.tiles.map(function (src, i) {
+    const img = document.createElement('img');
+    img.className = 'orbit-tile';
+    img.src = src;
+    img.alt = '';
+    const size = SIZES[i % SIZES.length];
+    img.dataset.w = size[0];
+    img.dataset.h = size[1];
+    img.dataset.angle = String((i / ASSETS.tiles.length) * Math.PI * 2 - Math.PI / 2);
+    img.style.width = size[0] + 'px';
+    img.style.height = size[1] + 'px';
+    orbitLayer.appendChild(img);
+    return img;
+  });
+
+  /* ---------- word reveals ---------- */
+  const statementWords = wrapWords(document.getElementById('statement'), STATEMENT);
+  const founderWords = wrapWords(document.getElementById('founderQuote'), FOUNDER);
+
+  /* ---------- partners ---------- */
+  function fillMarquee(el, urls) {
+    const loop = urls.concat(urls, urls, urls);
+    el.innerHTML = loop.map(function (src) {
+      return '<div class="partner-card"><img src="' + src + '" alt="" /></div>';
+    }).join('');
+  }
+  fillMarquee(document.getElementById('row1'), ASSETS.partners.slice(0, 5));
+  fillMarquee(document.getElementById('row2'), ASSETS.partners.slice(5));
+
+  /* ---------- form ---------- */
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    e.target.querySelector('.submit').textContent = 'SENT';
+  });
+
+  /* ---------- force local video autoplay ---------- */
+  const founderVideo = document.getElementById('founderVideo');
+  function playFounderVideo() {
+    if (!founderVideo) return;
+    founderVideo.muted = true;
+    founderVideo.playsInline = true;
+    const playPromise = founderVideo.play();
+    if (playPromise && playPromise.catch) {
+      playPromise.catch(function () {
+        // Retry once user scrolls / interacts
+      });
+    }
+  }
+  playFounderVideo();
+  document.addEventListener('pointerdown', playFounderVideo, { once: true });
+  document.addEventListener('touchstart', playFounderVideo, { once: true });
+  document.addEventListener('scroll', playFounderVideo, { once: true, passive: true });
+  if ('IntersectionObserver' in window && founderVideo) {
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) playFounderVideo();
+      });
+    }, { threshold: 0.2 });
+    io.observe(founderVideo);
+  }
+
+  /* ---------- main RAF ---------- */
+  let orbitSpin = 0;
+  let last = performance.now();
+
+  const els = {
+    hero: document.getElementById('hero'),
+    about: document.getElementById('spacer-grid'),
+    founder: document.getElementById('founder'),
+    showcase: document.getElementById('visual-showcase'),
+    yellow: document.getElementById('heroYellow'),
+    photo: document.getElementById('heroPhoto'),
+    glow: document.getElementById('heroGlow'),
+    h1: document.getElementById('heroH1'),
+    statement: document.getElementById('statementWrap'),
+    final: document.getElementById('finalLine'),
+    aboutFill: document.getElementById('aboutFill'),
+    aboutOne: document.getElementById('aboutOne'),
+    aboutTwo: document.getElementById('aboutTwo'),
+    aboutPhoto: document.getElementById('aboutPhoto'),
+    aboutCard: document.getElementById('aboutCard'),
+    showcaseFigure: document.getElementById('showcaseFigure'),
+    logoImg: document.getElementById('logoImg')
+  };
+
+  function revealWords(words, progress, start, end, dim, accent) {
+    const n = words.length;
+    for (let i = 0; i < n; i++) {
+      const span = (end - start) / n;
+      const from = start + i * span;
+      const to = from + span * 0.85;
+      const o = map(progress, from, to, dim, 1);
+      words[i].style.opacity = String(o);
+      if (accent) {
+        if (progress >= to) words[i].style.color = '#ffffff';
+        else if (progress >= from) words[i].style.color = accent;
+        else words[i].style.color = 'rgba(255,255,255,0.28)';
+      }
+    }
+  }
+
+  function update(now) {
+    const dt = (now - last) / 1000;
+    last = now;
+
+    const hp = sectionProgress(els.hero);
+    const ap = sectionProgress(els.about);
+    const fp = sectionProgress(els.founder);
+
+    // Hero photo / yellow
+    const photoOp = map(hp, 0.16, 0.36, 1, 0);
+    const photoScale = map(hp, 0, 0.36, 1, 1.08);
+    const yellowOp = map(hp, 0.14, 0.34, 0, 1);
+    const glowOp = map(hp, 0, 0.3, 0.25, 0.7);
+    els.photo.style.opacity = String(photoOp);
+    els.photo.style.transform = 'scale(' + photoScale + ')';
+    els.yellow.style.opacity = String(yellowOp);
+    els.glow.style.opacity = String(glowOp);
+
+    // Headline
+    const h1Op = map(hp, 0.08, 0.24, 1, 0);
+    const h1Y = map(hp, 0, 0.2, 0, -24);
+    els.h1.style.opacity = String(h1Op);
+    els.h1.style.transform = 'translateY(' + h1Y + 'px)';
+
+    // Statement (readable card)
+    const stOp = map(hp, 0.32, 0.42, 0, 1) * map(hp, 0.64, 0.76, 1, 0);
+    els.statement.style.opacity = String(stOp);
+    revealWords(statementWords, hp, 0.34, 0.62, 0.28);
+
+    // Final
+    const fOp = map(hp, 0.72, 0.88, 0, 1);
+    const fY = map(hp, 0.72, 0.9, 28, 0);
+    els.final.style.opacity = String(fOp);
+    els.final.style.transform = 'translateY(' + fY + 'px)';
+
+    // Orbit
+    if (hp > 0.12 && hp < 0.82) orbitSpin += dt * 0.18;
+    const expand = map(hp, 0.12, 0.38, 0.08, 1);
+    const tileOp = map(hp, 0.1, 0.26, 0, 1) * map(hp, 0.64, 0.8, 1, 0);
+    const tileScale = map(hp, 0.1, 0.38, 0.45, 1);
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const base = Math.min(vw * 0.36, vh * 0.36, 420);
+    const radiusX = base * 1.15;
+    const radiusY = base;
+
+    for (let i = 0; i < tiles.length; i++) {
+      const tile = tiles[i];
+      const w = Number(tile.dataset.w);
+      const h = Number(tile.dataset.h);
+      const angle = Number(tile.dataset.angle) + orbitSpin;
+      const x = Math.cos(angle) * radiusX * expand - w / 2;
+      const y = Math.sin(angle) * radiusY * expand - h / 2;
+      tile.style.opacity = String(tileOp);
+      tile.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + tileScale + ')';
+    }
+
+    // About card
+    const fillH = map(ap, 0, 0.34, 34, 86);
+    const fillH2 = map(ap, 0.34, 0.48, fillH, 100);
+    els.aboutFill.style.height = fillH2 + '%';
+    els.aboutOne.style.opacity = String(map(ap, 0.2, 0.32, 1, 0));
+    els.aboutTwo.style.opacity = String(map(ap, 0.38, 0.5, 0, 1) * map(ap, 0.62, 0.74, 1, 0));
+    const photoOp = map(ap, 0.68, 0.82, 0, 1);
+    els.aboutPhoto.style.opacity = String(photoOp);
+    els.aboutFill.style.opacity = String(1 - photoOp);
+    if (photoOp > 0.2) {
+      els.aboutOne.style.opacity = '0';
+      els.aboutTwo.style.opacity = '0';
+    }
+    els.aboutCard.classList.toggle('photo-mode', photoOp > 0.4);
+    // Dead-center once the circle is on screen
+    const cardY = photoOp > 0.4 ? 0 : map(ap, 0, 0.68, 24, 0);
+    els.aboutCard.style.transform = 'translate3d(0,' + cardY + 'px,0)';
+
+    // Founder words
+    revealWords(founderWords, fp, 0.08, 0.72, 0.28, '#FFEC88');
+
+    // Showcase scale
+    const sRect = els.showcase.getBoundingClientRect();
+    const sProg = clamp(1 - (sRect.top + sRect.height * 0.3) / (window.innerHeight + sRect.height * 0.3), 0, 1);
+    const sScale = map(sProg, 0.15, 0.55, 0.92, 1);
+    els.showcaseFigure.style.transform = 'scale(' + sScale + ')';
+
+    // Logo color
+    const heroH = els.hero.offsetHeight;
+    const yScroll = window.scrollY;
+    const heroDark = yScroll < heroH * 0.22;
+    const fRect = els.founder.getBoundingClientRect();
+    const founderDark = fRect.top < window.innerHeight * 0.45 && fRect.bottom > window.innerHeight * 0.35;
+    els.logoImg.src = (heroDark || founderDark) ? ASSETS.logoWhite : ASSETS.logo;
+
+    requestAnimationFrame(update);
+  }
+
+  requestAnimationFrame(update);
+})();
+</script>
+</body>
+</html>

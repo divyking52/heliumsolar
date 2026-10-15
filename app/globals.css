@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), "Inter", sans-serif;
+  --font-display: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  --color-solar: #ffec88;
+  --color-brand: #0b4f9c;
+  --color-ink: #0e0e0e;
+  --color-muted: #555555;
+  --color-stone: #0b4f9c;
+  --color-clay: #0d3d74;
+  --color-dusk: #123a5f;
+}
+
+html,
+body {
+  background: #ffffff;
+  color: #0e0e0e;
+  scrollbar-width: none;
+  overflow-x: clip;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+::selection {
+  background: #ffec88;
+  color: #0e0e0e;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-left {
+  animation: marquee-left 42s linear infinite;
+}
+
+.marquee-right {
+  animation: marquee-right 46s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-left,
+  .marquee-right {
+    animation: none;
+  }
+}
