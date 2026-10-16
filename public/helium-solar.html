@@ -1,972 +1,1902 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Helium Solar — Solar Company In Kanpur, UP | Since 2012</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --solar: #ffec88;
-    --brand: #0b4f9c;
-    --ink: #0e0e0e;
-    --muted: #555555;
-    --stone: #0b4f9c;
-    --clay: #0d3d74;
-    --dusk: #123a5f;
-    --white: #ffffff;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html {
-    scrollbar-width: thin;
-    overflow-x: clip;
-    scroll-behavior: auto;
-  }
-
-  body {
-    font-family: Inter, system-ui, sans-serif;
-    background: var(--white);
-    color: var(--ink);
-    -webkit-font-smoothing: antialiased;
-    overflow-x: clip;
-  }
-
-  img { display: block; max-width: 100%; }
-  a { color: inherit; text-decoration: none; }
-  button, input, textarea { font: inherit; }
-
-  .logo {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 50;
-    height: 44px;
-  }
-  .logo img { height: 100%; width: auto; transition: opacity .4s ease; }
-
-  /* HERO */
-  #hero { position: relative; height: 520vh; }
-  .hero-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    background: var(--white);
-  }
-  .hero-yellow {
-    position: absolute;
-    inset: 0;
-    background: var(--solar);
-    opacity: 0;
-  }
-  .hero-photo {
-    position: absolute;
-    inset: 0;
-    transform-origin: center;
-  }
-  .hero-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .hero-glow {
-    position: absolute;
-    inset: 0 0 auto;
-    height: 42%;
-    background: radial-gradient(ellipse at top, rgba(11,79,156,.35), transparent 68%);
-    pointer-events: none;
-  }
-  .hero-shade {
-    position: absolute;
-    inset: auto 0 0;
-    height: 160px;
-    background: linear-gradient(to top, rgba(0,0,0,.45), transparent);
-  }
-  .orbit-layer {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    pointer-events: none;
-  }
-  .orbit-tile {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    object-fit: cover;
-    box-shadow: 0 18px 40px rgba(0,0,0,.12);
-    opacity: 0;
-    will-change: transform, opacity;
-  }
-  .hero-h1 {
-    position: absolute;
-    left: 20px;
-    right: 20px;
-    bottom: 36px;
-    z-index: 20;
-    max-width: 920px;
-    font-size: clamp(27px, 3.2vw, 38px);
-    font-weight: 600;
-    letter-spacing: -0.065em;
-    line-height: 1;
-    color: #fff;
-  }
-  .hero-h1 span { display: block; }
-  .hero-h1 .dim { color: rgba(255,255,255,.85); }
-
-  .statement-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .statement-card {
-    max-width: 920px;
-    width: min(920px, 100%);
-    padding: clamp(20px, 3vw, 36px) clamp(22px, 3.5vw, 44px);
-    border-radius: 18px;
-    background: rgba(255, 252, 235, 0.88);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 20px 60px rgba(14,14,14,.08);
-    border: 1px solid rgba(14,14,14,.06);
-  }
-  .statement {
-    text-align: center;
-    font-family: "Plus Jakarta Sans", Inter, sans-serif;
-    font-size: clamp(18px, 2.6vw, 34px);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.25;
-    color: var(--ink);
-  }
-  .statement .word {
-    display: inline-block;
-    opacity: .22;
-    transition: none;
-  }
-
-  .final-line {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    text-align: center;
-    font-family: "Plus Jakarta Sans", Inter, sans-serif;
-    font-size: clamp(28px, 5vw, 64px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.02;
-    color: var(--ink);
-    opacity: 0;
-  }
-
-  /* ABOUT */
-  #spacer-grid { position: relative; height: 420vh; background: #fff; }
-  .about-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    display: grid;
-    place-items: center;
-    padding: 24px;
-  }
-  .about-card {
-    position: relative;
-    width: min(520px, calc(100vw - 48px));
-    aspect-ratio: 1 / 1;
-    border: 1px solid #000;
-    background: #fff;
-    overflow: hidden;
-    transition: border-color .35s ease, box-shadow .35s ease;
-  }
-  .about-card.photo-mode {
-    border-color: transparent !important;
-    box-shadow: none;
-    background: transparent;
-  }
-  .about-card.photo-mode .about-fill,
-  .about-card.photo-mode .about-stage {
-    opacity: 0 !important;
-    pointer-events: none;
-  }
-  .about-fill {
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 34%;
-    background: var(--solar);
-  }
-  .about-stage {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    padding: 32px 28px;
-    opacity: 0;
-  }
-  .about-stage.one { display: flex; flex-direction: column; justify-content: flex-end; opacity: 1; }
-  .about-stage.two { padding-top: 80px; }
-  .about-stage p {
-    font-size: clamp(22px, 2.2vw, 28px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.18;
-  }
-  .about-photo {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    display: block;
-    object-fit: contain;
-    object-position: center center;
-    background: transparent;
-    opacity: 0;
-  }
-
-  /* FOUNDER */
-  #founder { position: relative; height: 240vh; background: #fff; }
-  .founder-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    background: #171717;
-  }
-  .founder-video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: 0;
-    pointer-events: none;
-    background: #171717;
-  }
-  .founder-shade {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.15), rgba(0,0,0,.2));
-  }
-  .founder-copy {
-    position: absolute;
-    right: 40px;
-    bottom: 40px;
-    left: 20px;
-    max-width: 380px;
-    z-index: 5;
-  }
-  @media (min-width: 640px) {
-    .founder-copy { left: auto; }
-  }
-  .founder-quote {
-    font-size: clamp(15px, 1.4vw, 18px);
-    line-height: 1.35;
-    letter-spacing: -0.02em;
-    color: #fff;
-  }
-  .founder-quote .word {
-    display: inline-block;
-    opacity: .28;
-  }
-  .founder-label {
-    margin-top: 16px;
-    font-size: 24px;
-    font-weight: 500;
-    color: #fff;
-  }
-
-  /* MARQUEE */
-  #marquee { background: #fff; padding: 80px 0; }
-  .section-pad { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
-  .marquee-title {
-    font-size: clamp(28px, 3vw, 34px);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    margin-bottom: 40px;
-  }
-  .marquee-row { overflow: hidden; margin-bottom: 16px; }
-  .marquee-track {
-    display: flex;
-    width: max-content;
-    gap: 16px;
-  }
-  .marquee-track.left { animation: marquee-left 42s linear infinite; }
-  .marquee-track.right { animation: marquee-right 46s linear infinite; }
-  .partner-card {
-    width: 140px;
-    height: 140px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(0,0,0,.05);
-    background: #fff;
-    padding: 16px;
-    transition: transform .5s ease;
-  }
-  .partner-card:hover { transform: scale(1.04); }
-  .partner-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
-
-  @keyframes marquee-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @keyframes marquee-right {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
-  }
-
-  /* SHOWCASE */
-  #visual-showcase { background: #fff; padding: 96px 0; }
-  .showcase-eyebrow {
-    max-width: 360px;
-    font-size: 14px;
-    line-height: 1.15;
-    color: var(--muted);
-    margin-bottom: 32px;
-  }
-  .showcase-frame {
-    position: relative;
-    width: min(100%, 636px);
-    aspect-ratio: 16 / 9;
-    margin-bottom: 32px;
-  }
-  .showcase-glow {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.12);
-    opacity: .45;
-    filter: blur(36px);
-    pointer-events: none;
-  }
-  .showcase-figure {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #f5f5f5;
-    box-shadow: 0 30px 80px rgba(0,0,0,.08);
-    transform: scale(.92);
-  }
-  .showcase-figure img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .showcase-headline {
-    max-width: 1100px;
-    font-size: clamp(34px, 5vw, 64px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: .95;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .showcase-body {
-    max-width: 520px;
-    font-size: 14px;
-    line-height: 1.15;
-    color: var(--muted);
-  }
-
-  /* PILLARS */
-  #pillars { background: #fff; }
-  .pillar {
-    color: #fff;
-    border-top: 1px solid rgba(255,255,255,.15);
-    padding: 80px 40px;
-  }
-  .pillar.stone { background: var(--stone); }
-  .pillar.clay { background: var(--clay); }
-  .pillar.dusk { background: var(--dusk); }
-  .pillar-inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    display: grid;
-    gap: 32px;
-  }
-  @media (min-width: 1024px) {
-    .pillar-inner {
-      grid-template-columns: 7fr 5fr;
-      align-items: end;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Helium Solar — India's Trusted Solar EPC Company Since 2012</title>
+  <meta name="description" content="Delivering high-performance rooftop solar systems, commercial solar installations, and industrial solar power solutions across India since 2012." />
+  <link rel="icon" href="https://www.heliumsolar.in/Content/assets/My-image/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <style>
+    :root {
+      --font-sans: "Manrope", sans-serif;
+      --font-display: "Outfit", sans-serif;
+      --brand: #0b2154;
+      --brand-mid: #1a3c8b;
+      --brand-deep: #071536;
+      --accent: #ffc107;
+      --accent-soft: #ffe9a3;
+      --ink: #12141a;
+      --muted: #5c6370;
+      --paper: #f6f5f1;
+      --paper-warm: #ebe8e0;
+      --line: rgba(11, 33, 84, 0.12);
+      --line-strong: rgba(11, 33, 84, 0.22);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
-  }
-  .pillar h1 {
-    font-size: clamp(64px, 8vw, 96px);
-    font-weight: 400;
-    letter-spacing: -0.09em;
-    line-height: 1;
-  }
-  .pillar .label {
-    font-size: 14px;
-    line-height: 1.1;
-    color: rgba(255,255,255,.8);
-  }
-  .pillar .body {
-    margin-top: 12px;
-    max-width: 640px;
-    font-size: clamp(18px, 1.6vw, 20px);
-    font-weight: 500;
-    line-height: 1.45;
-  }
 
-  /* CLOSING */
-  #closing-vision {
-    background: #fff;
-    padding: 112px 40px;
-  }
-  .closing-title {
-    max-width: 420px;
-    font-size: clamp(36px, 4vw, 44px);
-    font-weight: 500;
-    letter-spacing: -0.036em;
-    line-height: 1;
-    white-space: pre-line;
-  }
-  .closing-body {
-    margin-top: 24px;
-    max-width: 560px;
-    font-size: 16px;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-    color: var(--muted);
-  }
-  .closing-contact {
-    margin-top: 16px;
-    font-size: 14px;
-    color: var(--muted);
-  }
-  .closing-contact a:hover { color: var(--brand); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  form { margin-top: 56px; max-width: 720px; }
-  label {
-    display: block;
-    border-bottom: 1px solid rgba(0,0,0,.15);
-    padding: 16px 0;
-  }
-  label span {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 16px;
-    letter-spacing: -0.01em;
-  }
-  label span.upper { text-transform: uppercase; }
-  input, textarea {
-    width: 100%;
-    border: 0;
-    outline: none;
-    background: transparent;
-    font-size: 16px;
-    resize: none;
-  }
-  input::placeholder, textarea::placeholder { color: rgba(0,0,0,.3); }
-  .submit {
-    margin-top: 32px;
-    border: 0;
-    background: none;
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: .04em;
-    color: var(--brand);
-    cursor: pointer;
-  }
-  .submit:hover { opacity: .6; }
+    html { scroll-behavior: auto; }
 
-  footer {
-    background: #fff;
-    padding: 24px 40px 40px;
-  }
-  .footer-logo {
-    display: block;
-    width: min(720px, 100%);
-    margin: 0 auto;
-    height: auto;
-  }
-  .footer-address {
-    margin: 24px auto 0;
-    max-width: 720px;
-    text-align: center;
-    font-size: 14px;
-    color: var(--muted);
-  }
-  .footer-bar {
-    margin-top: 32px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(0,0,0,.1);
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    color: rgba(14,14,14,.7);
-  }
-  .footer-bar a:hover { opacity: .6; }
+    html, body {
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: clip;
+    }
 
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track.left, .marquee-track.right { animation: none; }
-  }
-</style>
+    body {
+      font-family: var(--font-sans);
+      font-feature-settings: "ss01" on, "kern" on;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+    ul, ol { list-style: none; }
+
+    ::selection { background: var(--accent); color: var(--brand-deep); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .font-display { font-family: var(--font-display); }
+
+    .container-site { width: min(100% - 2rem, 72rem); margin-inline: auto; }
+    .container-wide { width: min(100% - 2rem, 84rem); margin-inline: auto; }
+
+    /* Buttons */
+    .btn {
+      group: true;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-radius: 2px;
+      padding: 0.875rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.3s var(--ease);
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .btn span.arrow {
+      display: inline-block;
+      transition: transform 0.3s var(--ease);
+    }
+    .btn:hover span.arrow { transform: translateX(4px); }
+    .btn-fill::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: translateY(101%);
+      transition: transform 0.45s var(--ease);
+      z-index: -1;
+    }
+    .btn-fill:hover::before, .btn-fill:focus-visible::before { transform: translateY(0); }
+    .btn-fill:hover, .btn-fill:focus-visible { color: var(--brand-deep); }
+    .btn-primary { background: var(--brand); color: #fff; border: 1px solid var(--brand); }
+    .btn-secondary { background: transparent; color: var(--brand); border: 1px solid rgba(11,33,84,0.3); }
+    .btn-secondary:hover { border-color: var(--brand); }
+    .btn-light { background: #fff; color: var(--brand); border: 1px solid #fff; }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -0.2em;
+      width: 100%; height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s var(--ease);
+    }
+    .nav-link:hover::after, .nav-link[aria-current="page"]::after { transform: scaleX(1); }
+
+    .img-zoom { overflow: hidden; }
+    .img-zoom img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.9s var(--ease);
+    }
+    .img-zoom:hover img { transform: scale(1.05); }
+
+    @keyframes partners-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .partners-track {
+      display: flex; width: max-content; align-items: center;
+      gap: 3rem; padding: 0 1.5rem;
+      animation: partners-marquee 48s linear infinite;
+    }
+    .partners-track:hover { animation-play-state: paused; }
+    @media (min-width: 768px) {
+      .partners-track { gap: 4rem; }
+    }
+
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: 0.35; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(6px); }
+    }
+    .scroll-indicator-dot {
+      display: block; height: 2rem; width: 1px; background: rgba(255,255,255,0.5);
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .partners-track { animation: none; }
+      .motion-safe-only { display: none !important; }
+      .img-zoom img { transition: none; }
+      .img-zoom:hover img { transform: none; }
+      .btn-fill::before { transition: none; }
+      .scroll-indicator-dot { animation: none; }
+    }
+
+    /* ========== HEADER ========== */
+    .site-header {
+      position: fixed; inset-inline: 0; top: 0; z-index: 50;
+      transition: all 0.5s var(--ease);
+    }
+    .site-header.is-scrolled,
+    .site-header.is-open {
+      background: rgba(246,245,241,0.95);
+      box-shadow: 0 1px 0 var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .header-top {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: var(--brand-deep);
+      font-size: 11px;
+      color: rgba(255,255,255,0.8);
+    }
+    .header-top-inner {
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 0.5rem; padding: 0.5rem 0;
+    }
+    .header-top a:hover { color: var(--accent); }
+    .header-main {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; padding: 0.75rem 0;
+    }
+    @media (min-width: 768px) { .header-main { padding: 1rem 0; } }
+    .logo img { height: 2.5rem; width: auto; }
+    @media (min-width: 768px) { .logo img { height: 3rem; } }
+    .nav-desktop { display: none; align-items: center; gap: 1.75rem; }
+    @media (min-width: 1024px) { .nav-desktop { display: flex; } }
+    .nav-desktop a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+      color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      transition: color 0.3s;
+    }
+    .site-header.is-scrolled .nav-desktop a,
+    .site-header.is-open .nav-desktop a { color: var(--ink); text-shadow: none; }
+    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .btn-enquire {
+      display: none; border-radius: 2px; padding: 0.625rem 1rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; transition: background 0.3s, color 0.3s;
+      background: rgba(255,255,255,0.95); color: var(--brand);
+    }
+    .btn-enquire:hover { background: var(--accent); }
+    .site-header.is-scrolled .btn-enquire,
+    .site-header.is-open .btn-enquire {
+      background: var(--brand); color: #fff;
+    }
+    .site-header.is-scrolled .btn-enquire:hover,
+    .site-header.is-open .btn-enquire:hover { background: var(--brand-mid); }
+    @media (min-width: 640px) { .btn-enquire { display: inline-flex; } }
+    .menu-toggle {
+      display: flex; height: 2.75rem; width: 2.75rem;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.375rem; border-radius: 2px; border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+    }
+    .site-header.is-scrolled .menu-toggle,
+    .site-header.is-open .menu-toggle {
+      border-color: rgba(11,33,84,0.2); color: var(--ink);
+    }
+    @media (min-width: 1024px) { .menu-toggle { display: none; } }
+    .menu-toggle span {
+      display: block; height: 1px; width: 1.25rem; background: currentColor;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .site-header.is-open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .site-header.is-open .menu-toggle span:nth-child(2) { opacity: 0; }
+    .site-header.is-open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav {
+      position: fixed; inset: 0; top: 7.5rem; z-index: 40;
+      background: var(--paper);
+      transform: translateX(100%);
+      transition: transform 0.5s var(--ease);
+    }
+    .site-header.is-open .mobile-nav { transform: translateX(0); }
+    @media (min-width: 1024px) { .mobile-nav { display: none; } }
+    .mobile-nav nav {
+      display: flex; flex-direction: column; gap: 0.25rem; padding: 2rem 0;
+    }
+    .mobile-nav a {
+      border-bottom: 1px solid var(--line);
+      padding: 1rem 0;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--brand);
+    }
+    .mobile-nav .btn-mobile-enquire {
+      margin-top: 1.5rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 2px; background: var(--brand); color: #fff;
+      padding: 1rem 1.5rem; font-size: 0.875rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .hide-sm { display: none; }
+    @media (min-width: 640px) { .hide-sm { display: inline; } }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 100svh;
+      align-items: flex-end;
+      overflow: hidden;
+      background: var(--brand-deep);
+      color: #fff;
+    }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-img { position: absolute; inset: 0; will-change: transform; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-grad-t {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, var(--brand-deep), rgba(7,21,54,0.55) 50%, rgba(7,21,54,0.25));
+    }
+    .hero-grad-r {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(7,21,54,0.7), transparent);
+    }
+    .hero-content {
+      position: relative; z-index: 10; width: 100%;
+      padding-bottom: 4rem; padding-top: 10rem;
+    }
+    @media (min-width: 768px) {
+      .hero-content { padding-bottom: 6rem; padding-top: 12rem; }
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      max-width: 56rem;
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .hero-word-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; }
+    .hero-word { display: inline-block; will-change: transform; }
+    .hero-body {
+      margin-top: 1.5rem; max-width: 36rem;
+      font-size: 1rem; line-height: 1.625; color: rgba(255,255,255,0.85);
+    }
+    @media (min-width: 768px) { .hero-body { font-size: 1.125rem; } }
+    .hero-ctas {
+      margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+    }
+    .hero-video-link {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      padding-bottom: 0.25rem; font-size: 0.875rem; color: rgba(255,255,255,0.9);
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .hero-video-link:hover { border-color: var(--accent); color: var(--accent); }
+    .scroll-hint {
+      position: absolute; bottom: 2rem; right: 1.5rem;
+      display: none; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.6);
+    }
+    @media (min-width: 768px) { .scroll-hint { display: flex; } }
+
+    /* ========== PARTNERS ========== */
+    .partners {
+      border-block: 1px solid var(--line);
+      background: #fff;
+      padding: 2.5rem 0;
+    }
+    @media (min-width: 768px) { .partners { padding: 3.5rem 0; } }
+    .partners-overflow { overflow: hidden; }
+    .partner-logo {
+      position: relative; display: flex; height: 3rem; width: 7rem;
+      flex-shrink: 0; align-items: center; justify-content: center;
+      opacity: 0.7; filter: grayscale(1); transition: opacity 0.3s, filter 0.3s;
+    }
+    .partner-logo:hover { opacity: 1; filter: grayscale(0); }
+    .partner-logo img { max-height: 3rem; width: auto; object-fit: contain; }
+    @media (min-width: 768px) {
+      .partner-logo { height: 3.5rem; width: 9rem; }
+      .partner-logo img { max-height: 3.5rem; }
+    }
+
+    /* ========== SOLUTIONS ========== */
+    .solutions {
+      position: relative; height: 100svh; overflow: hidden;
+      background: var(--brand-deep); color: #fff;
+    }
+    .solutions-chrome {
+      pointer-events: none; position: absolute; inset-inline: 0; top: 0; z-index: 20;
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem;
+      background: linear-gradient(to bottom, var(--brand-deep), rgba(7,21,54,0.8), transparent);
+      padding: 5.5rem 1rem 1rem;
+    }
+    @media (min-width: 768px) { .solutions-chrome { padding: 6rem 1.5rem 1rem; } }
+    @media (min-width: 1280px) { .solutions-chrome { padding-inline: 2rem; } }
+    .solutions-chrome .eyebrow {
+      margin-bottom: 0.125rem; font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent);
+    }
+    .solutions-chrome h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2vw, 1.7rem);
+      font-weight: 600; line-height: 1.2; letter-spacing: -0.01em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .solutions-counter {
+      flex-shrink: 0; font-family: var(--font-display);
+      font-size: 0.75rem; font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.6);
+    }
+    .solutions-counter .sep { margin: 0 0.25rem; color: rgba(255,255,255,0.3); }
+
+    .solutions-desktop {
+      position: absolute; inset: 0; display: none;
+    }
+    @media (min-width: 768px) { .solutions-desktop { display: flex; } }
+    .sol-panel {
+      position: relative; min-width: 0; overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      flex-grow: 1;
+      transition: flex-grow 0.5s var(--ease);
+    }
+    .sol-panel:last-child { border-right: none; }
+    .sol-panel.is-focus { flex-grow: 5.5; }
+    .sol-panel img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.7s var(--ease);
+      transform: scale(1.08);
+    }
+    .sol-panel.is-focus img { transform: scale(1); }
+    .sol-overlay {
+      position: absolute; inset: 0;
+      background: rgba(7,21,54,0.5);
+      transition: background 0.5s;
+    }
+    .sol-panel.is-focus .sol-overlay {
+      background: linear-gradient(to top, rgba(7,21,54,0.95), rgba(7,21,54,0.2) 40%, rgba(7,21,54,0.3));
+    }
+    .sol-collapsed {
+      position: absolute; inset-inline: 0; bottom: 0; padding: 0.75rem 1rem;
+      transition: opacity 0.3s;
+    }
+    .sol-panel.is-focus .sol-collapsed { opacity: 0; pointer-events: none; }
+    .sol-num {
+      font-size: 10px; font-weight: 600; font-variant-numeric: tabular-nums;
+      letter-spacing: 0.18em; color: var(--accent);
+    }
+    .sol-collapsed h3 {
+      font-family: var(--font-display); margin-top: 0.25rem;
+      font-size: 0.875rem; font-weight: 600; line-height: 1.25;
+    }
+    .sol-expanded {
+      position: absolute; inset-inline: 0; bottom: 0; padding: 1.5rem 2rem;
+      opacity: 0; transform: translateY(1.25rem); pointer-events: none;
+      transition: all 0.5s var(--ease);
+    }
+    .sol-panel.is-focus .sol-expanded {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .sol-expanded h3 {
+      font-family: var(--font-display); margin-top: 0.5rem; max-width: 32rem;
+      font-size: 1.875rem; font-weight: 600; line-height: 1.15;
+    }
+    @media (min-width: 1280px) { .sol-expanded h3 { font-size: 2.25rem; } }
+    .sol-expanded p {
+      margin-top: 0.75rem; max-width: 28rem;
+      font-size: 0.875rem; line-height: 1.625; color: rgba(255,255,255,0.8);
+    }
+    .sol-cta {
+      margin-top: 1.25rem; display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.875rem; font-weight: 500;
+    }
+    .sol-cta .arr { transition: transform 0.3s; }
+    .sol-panel:hover .sol-cta .arr { transform: translateX(4px); }
+
+    .solutions-mobile { position: absolute; inset: 0; }
+    @media (min-width: 768px) { .solutions-mobile { display: none; } }
+    .sol-slide {
+      position: absolute; inset: 0; opacity: 0; z-index: 0;
+      transition: opacity 0.5s;
+    }
+    .sol-slide.is-active { opacity: 1; z-index: 10; }
+    .sol-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .sol-slide-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, var(--brand-deep), rgba(7,21,54,0.35) 40%, rgba(7,21,54,0.4));
+    }
+    .sol-slide-copy {
+      position: absolute; inset-inline: 0; bottom: 0; padding: 1.25rem 1.25rem 5rem;
+    }
+    .sol-slide-copy h3 {
+      font-family: var(--font-display); margin-top: 0.5rem;
+      font-size: 1.5rem; font-weight: 600;
+    }
+    .sol-slide-copy p {
+      margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.625; color: rgba(255,255,255,0.8);
+    }
+    .sol-mobile-nav {
+      position: absolute; inset-inline: 0; bottom: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0.75rem; padding: 0.75rem 1rem;
+    }
+    .sol-dots { display: flex; gap: 0.375rem; }
+    .sol-dot {
+      height: 0.25rem; width: 1.5rem; background: rgba(255,255,255,0.3);
+      transition: background 0.3s;
+    }
+    .sol-dot.is-active { background: var(--accent); }
+    .sol-arrows { display: flex; gap: 0.25rem; }
+    .sol-arrows button {
+      display: flex; height: 2rem; width: 2rem; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,0.3); font-size: 0.75rem;
+    }
+
+    /* ========== WHY CHOOSE ========== */
+    .why { border-top: 1px solid var(--line); background: #fff; }
+    .why-inner { padding: 2.5rem 0; }
+    @media (min-width: 768px) { .why-inner { padding: 3rem 0; } }
+    .why-header {
+      display: grid; gap: 1rem;
+      border-bottom: 1px solid var(--line); padding-bottom: 1.5rem;
+    }
+    @media (min-width: 1024px) {
+      .why-header {
+        grid-template-columns: repeat(12, 1fr); align-items: end; gap: 2rem; padding-bottom: 1.75rem;
+      }
+      .why-header-title { grid-column: span 5; }
+      .why-header-body { grid-column: span 5; }
+      .why-header-cta { grid-column: span 2; justify-self: end; }
+    }
+    .eyebrow {
+      margin-bottom: 0.375rem; font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.22em; color: var(--brand-mid);
+    }
+    .why-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.6vw, 2.25rem);
+      font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: var(--brand);
+    }
+    .why-header-body p { font-size: 0.875rem; line-height: 1.625; color: var(--muted); }
+    .why-grid {
+      margin-top: 1.5rem; display: grid; gap: 1.5rem;
+    }
+    @media (min-width: 1024px) {
+      .why-grid { margin-top: 1.75rem; grid-template-columns: repeat(12, 1fr); gap: 2rem; }
+      .why-img-wrap { grid-column: span 5; min-height: 22rem; aspect-ratio: auto; height: 100%; }
+      .why-benefits { grid-column: span 7; }
+    }
+    .why-img-wrap {
+      position: relative; aspect-ratio: 16/11; overflow: hidden; background: var(--brand-deep);
+    }
+    .why-img-wrap img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      will-change: transform;
+    }
+    .why-img-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(7,21,54,0.5), transparent);
+    }
+    .benefit-list { border-top: 1px solid var(--line); }
+    .benefit-item {
+      display: grid;
+      grid-template-columns: 2.25rem 1fr auto;
+      align-items: baseline; gap: 0.25rem 0.75rem;
+      padding: 0.875rem 0; border-bottom: 1px solid var(--line);
+      transition: background 0.2s;
+    }
+    .benefit-item:hover { background: rgba(246,245,241,0.8); }
+    @media (min-width: 768px) {
+      .benefit-item {
+        grid-template-columns: 2.5rem minmax(0,1fr) minmax(0,14rem) auto;
+        gap: 0.25rem 1.25rem; padding: 1rem 0;
+      }
+    }
+    .benefit-num {
+      font-family: var(--font-display); font-size: 0.75rem;
+      font-variant-numeric: tabular-nums; color: rgba(26,60,139,0.7);
+    }
+    .benefit-title-wrap { display: flex; align-items: flex-start; gap: 0.625rem; }
+    .benefit-title-wrap img { margin-top: 0.125rem; flex-shrink: 0; width: 18px; height: 18px; opacity: 0.7; }
+    .benefit-title {
+      font-family: var(--font-display); font-size: 0.9375rem; font-weight: 600;
+      line-height: 1.35; color: var(--brand);
+    }
+    @media (min-width: 768px) { .benefit-title { font-size: 1rem; } }
+    .benefit-body {
+      grid-column: 2; font-size: 0.875rem; line-height: 1.4; color: var(--muted);
+    }
+    @media (min-width: 768px) { .benefit-body { grid-column: auto; } }
+    .benefit-arrow { color: var(--brand-mid); transition: transform 0.3s; }
+    .benefit-item:hover .benefit-arrow { transform: translateX(4px); }
+
+    /* ========== USP ========== */
+    .usp { background: var(--paper-warm); padding: 5rem 0; }
+    @media (min-width: 768px) { .usp { padding: 7rem 0; } }
+    .usp .eyebrow { font-size: 0.75rem; letter-spacing: 0.24em; margin-bottom: 1rem; }
+    .usp h2 {
+      font-family: var(--font-display); margin-bottom: 3.5rem; max-width: 56rem;
+      font-size: clamp(1.85rem, 3.5vw, 3rem); font-weight: 600;
+      line-height: 1.12; letter-spacing: -0.01em; color: var(--brand);
+    }
+    .usp-grid {
+      display: grid; align-items: center; gap: 2.5rem;
+    }
+    @media (min-width: 1024px) {
+      .usp-grid { grid-template-columns: repeat(12, 1fr); gap: 2rem; }
+      .usp-col { grid-column: span 4; display: flex; flex-direction: column; gap: 2.5rem; }
+      .usp-img { grid-column: span 4; }
+    }
+    .usp-item {
+      display: block; border-top: 1px solid var(--line-strong); padding-top: 1.5rem;
+    }
+    .usp-item-head { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .usp-item-head img { width: 24px; height: 24px; flex-shrink: 0; }
+    .usp-item h3 {
+      font-family: var(--font-display); font-size: 1.125rem; font-weight: 600;
+      line-height: 1.35; color: var(--brand); transition: color 0.3s;
+    }
+    .usp-item:hover h3 { color: var(--brand-mid); }
+    .usp-item p {
+      padding-left: 2.25rem; font-size: 0.875rem; line-height: 1.625; color: var(--muted);
+    }
+    .usp-img { aspect-ratio: 3/4; overflow: hidden; }
+    .usp-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ========== PROCESS ========== */
+    .process {
+      position: relative; overflow: hidden;
+      background: var(--brand-deep); color: #fff;
+    }
+    @media (min-width: 1024px) { .process { height: 100svh; } }
+    .process-inner {
+      display: grid; align-items: center; gap: 2.5rem; padding: 4rem 0; height: 100%;
+    }
+    @media (min-width: 1024px) {
+      .process-inner { grid-template-columns: repeat(12, 1fr); gap: 3rem; padding: 0; }
+      .process-copy { grid-column: span 5; }
+      .process-media { grid-column: span 7; }
+    }
+    .process .eyebrow { color: var(--accent); margin-bottom: 0.75rem; }
+    .process h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 600;
+      line-height: 1.12; letter-spacing: -0.01em;
+    }
+    .process-body {
+      margin-top: 1rem; font-size: 0.875rem; line-height: 1.625; color: rgba(255,255,255,0.7);
+    }
+    @media (min-width: 768px) { .process-body { font-size: 0.9375rem; } }
+    .process-steps { position: relative; margin-top: 2rem; }
+    .process-rail {
+      position: absolute; left: 1.05rem; top: 0.75rem; bottom: 0.75rem;
+      width: 1px; background: rgba(255,255,255,0.15); transform-origin: top;
+    }
+    .process-progress {
+      height: 100%; width: 1px; background: var(--accent);
+      transform-origin: top; transform: scaleY(0.2);
+    }
+    .process-step {
+      display: flex; gap: 1rem; padding: 0.75rem 0;
+      opacity: 0.4; transition: opacity 0.3s;
+    }
+    .process-step.is-active { opacity: 1; }
+    .process-step-num {
+      position: relative; z-index: 10;
+      display: flex; height: 2rem; width: 2rem; flex-shrink: 0;
+      align-items: center; justify-content: center; border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.3); background: var(--brand-deep);
+      font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7);
+      transition: all 0.3s;
+    }
+    .process-step.is-active .process-step-num,
+    .process-step.is-done .process-step-num {
+      border-color: var(--accent); background: var(--accent); color: var(--brand-deep);
+    }
+    .process-step-title {
+      padding-top: 0.25rem; font-family: var(--font-display);
+      font-size: 1rem; line-height: 1.35; color: rgba(255,255,255,0.8);
+      transition: color 0.3s, font-weight 0.3s;
+    }
+    @media (min-width: 768px) { .process-step-title { font-size: 1.125rem; } }
+    .process-step.is-active .process-step-title {
+      font-weight: 600; color: #fff;
+    }
+    .process-media-frame {
+      position: relative; aspect-ratio: 16/11; overflow: hidden;
+    }
+    @media (min-width: 1024px) {
+      .process-media-frame { aspect-ratio: auto; height: min(68vh, 32rem); }
+    }
+    .process-media-frame img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .process-media-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(7,21,54,0.8), transparent);
+    }
+    .process-media-caption {
+      position: absolute; inset-inline: 0; bottom: 0;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 1rem; padding: 1.25rem;
+    }
+    @media (min-width: 768px) { .process-media-caption { padding: 1.75rem; } }
+    .process-media-caption p {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+    }
+    @media (min-width: 768px) { .process-media-caption p { font-size: 1.875rem; } }
+    .process-media-caption span {
+      flex-shrink: 0; font-size: 0.875rem; font-weight: 600;
+      font-variant-numeric: tabular-nums; color: var(--accent);
+    }
+    .process-media-caption .dim { color: rgba(255,255,255,0.35); }
+
+    /* ========== FINANCING ========== */
+    .financing { background: #fff; padding: 5rem 0; }
+    @media (min-width: 768px) { .financing { padding: 7rem 0; } }
+    .financing-top {
+      display: grid; align-items: center; gap: 3rem;
+    }
+    @media (min-width: 1024px) {
+      .financing-top { grid-template-columns: repeat(12, 1fr); gap: 4rem; }
+      .financing-copy { grid-column: span 5; }
+      .financing-hero-img { grid-column: span 7; }
+    }
+    .financing .eyebrow { font-size: 0.75rem; letter-spacing: 0.24em; margin-bottom: 1rem; }
+    .financing h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.85rem, 3.5vw, 3rem); font-weight: 600;
+      line-height: 1.12; letter-spacing: -0.01em; color: var(--brand);
+    }
+    .financing-copy > p {
+      margin-top: 1.5rem; font-size: 0.9375rem; line-height: 1.625; color: var(--muted);
+    }
+    .financing-copy .btn { margin-top: 2rem; }
+    .financing-hero-img { aspect-ratio: 16/10; overflow: hidden; }
+    .financing-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .loan-steps {
+      margin-top: 4rem; display: grid; gap: 1.5rem;
+    }
+    @media (min-width: 768px) { .loan-steps { grid-template-columns: repeat(3, 1fr); } }
+    .loan-step {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--line); background: var(--paper); padding: 0.25rem;
+    }
+    .loan-step-img { aspect-ratio: 16/10; overflow: hidden; }
+    .loan-step-img img { width: 100%; height: 100%; object-fit: cover; }
+    .loan-step-body { display: flex; flex: 1; flex-direction: column; padding: 1.5rem; }
+    .loan-step h3 {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--brand);
+    }
+    .loan-step p {
+      margin-top: 0.75rem; flex: 1; font-size: 0.875rem; line-height: 1.625; color: var(--muted);
+    }
+    .loan-step a {
+      margin-top: 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.875rem; font-weight: 500; color: var(--brand); transition: color 0.3s;
+    }
+    .loan-step a:hover { color: var(--brand-mid); }
+    .loan-step a .arr { transition: transform 0.3s; }
+    .loan-step:hover a .arr { transform: translateX(4px); }
+
+    /* ========== TESTIMONIALS ========== */
+    .testimonials { background: var(--paper); padding: 5rem 0; }
+    @media (min-width: 768px) { .testimonials { padding: 7rem 0; } }
+    .testimonials .eyebrow { font-size: 0.75rem; letter-spacing: 0.24em; margin-bottom: 1rem; }
+    .testimonials-head {
+      margin-bottom: 3rem; display: flex; flex-wrap: wrap;
+      align-items: flex-end; justify-content: space-between; gap: 1.5rem;
+    }
+    .testimonials h2 {
+      font-family: var(--font-display); max-width: 36rem;
+      font-size: clamp(1.85rem, 3.5vw, 3rem); font-weight: 600;
+      line-height: 1.12; letter-spacing: -0.01em; color: var(--brand);
+    }
+    .testi-controls { display: flex; gap: 0.5rem; }
+    .testi-controls button {
+      display: flex; height: 3rem; width: 3rem; align-items: center; justify-content: center;
+      border: 1px solid var(--line-strong); color: var(--brand); transition: all 0.3s;
+    }
+    .testi-controls button:hover { background: var(--brand); color: #fff; }
+    .testi-body {
+      display: grid; gap: 2.5rem;
+    }
+    @media (min-width: 1024px) {
+      .testi-body { grid-template-columns: repeat(12, 1fr); gap: 4rem; }
+      .testi-photo { grid-column: span 4; aspect-ratio: 4/5; }
+      .testi-quote { grid-column: span 8; }
+    }
+    .testi-photo {
+      position: relative; aspect-ratio: 1; overflow: hidden; background: var(--brand-deep);
+    }
+    .testi-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .testi-quote {
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .testi-quote blockquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.4vw, 2rem); font-weight: 500;
+      line-height: 1.35; color: var(--brand);
+    }
+    .testi-quote figcaption {
+      margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 1.5rem;
+    }
+    .testi-quote figcaption .name {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--brand);
+    }
+    .testi-quote figcaption .role { margin-top: 0.25rem; font-size: 0.875rem; color: var(--muted); }
+    .testi-quote figcaption .count {
+      margin-top: 1rem; font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.2em; color: var(--muted);
+    }
+    .testi-tabs {
+      margin-top: 2.5rem; display: flex; gap: 0.5rem;
+    }
+    .testi-tab {
+      height: 0.375rem; flex: 1; background: var(--line-strong); transition: background 0.3s;
+    }
+    .testi-tab.is-active { background: var(--brand); }
+
+    /* ========== PROJECTS ========== */
+    .projects { background: var(--brand-deep); color: #fff; padding: 5rem 0; }
+    @media (min-width: 768px) { .projects { padding: 7rem 0; } }
+    .projects-head {
+      margin-bottom: 3rem; display: flex; flex-direction: column; gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .projects-head {
+        margin-bottom: 4rem; flex-direction: row; align-items: flex-end; justify-content: space-between;
+      }
+    }
+    .projects h2 {
+      font-family: var(--font-display); max-width: 48rem;
+      font-size: clamp(1.6rem, 3.2vw, 2.75rem); font-weight: 600;
+      line-height: 1.15; letter-spacing: -0.01em;
+    }
+    .projects-grid {
+      display: grid; gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .projects-grid { grid-template-columns: repeat(12, 1fr); gap: 1.25rem; }
+    }
+    .project-card {
+      position: relative; display: block; overflow: hidden;
+    }
+    .project-card:nth-child(1) { aspect-ratio: 16/10; }
+    .project-card:nth-child(2) { aspect-ratio: 4/5; }
+    .project-card:nth-child(n+3) { aspect-ratio: 16/11; }
+    @media (min-width: 768px) {
+      .project-card:nth-child(1) {
+        grid-column: span 8; aspect-ratio: auto; min-height: 28rem;
+      }
+      .project-card:nth-child(2) { grid-column: span 4; }
+      .project-card:nth-child(n+3) { grid-column: span 4; }
+    }
+    .project-card .img-zoom { position: absolute; inset: 0; }
+    .project-card .img-zoom img { position: absolute; inset: 0; }
+    .project-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(7,21,54,0.9), rgba(7,21,54,0.2), transparent);
+      opacity: 0.9; transition: opacity 0.3s;
+    }
+    .project-card:hover .project-grad { opacity: 1; }
+    .project-card h3 {
+      position: absolute; inset-inline: 0; bottom: 0; z-index: 10;
+      padding: 1.25rem; font-family: var(--font-display);
+      font-size: 1.125rem; font-weight: 600; line-height: 1.35;
+    }
+    @media (min-width: 768px) {
+      .project-card h3 { padding: 1.75rem; font-size: 1.25rem; }
+    }
+    .projects-row-wrap { margin-top: 2.5rem; overflow: hidden; }
+    @media (min-width: 768px) { .projects-row-wrap { margin-top: 3.5rem; } }
+    .projects-row {
+      display: flex; width: max-content; gap: 1rem; padding: 0 1rem;
+    }
+    @media (min-width: 768px) { .projects-row { gap: 1.25rem; padding: 0 2rem; } }
+    .project-thumb {
+      position: relative; display: block; height: 14rem; width: 18rem;
+      flex-shrink: 0; overflow: hidden;
+    }
+    @media (min-width: 768px) { .project-thumb { height: 18rem; width: 28rem; } }
+    .project-thumb .img-zoom { position: absolute; inset: 0; }
+    .project-thumb .img-zoom img { position: absolute; inset: 0; }
+    .project-thumb .project-grad {
+      background: linear-gradient(to top, rgba(7,21,54,0.85), transparent);
+    }
+    .project-thumb p {
+      position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
+      font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; line-height: 1.35;
+    }
+    @media (min-width: 768px) { .project-thumb p { font-size: 1rem; } }
+
+    /* ========== INSIGHTS ========== */
+    .insights { background: var(--paper); padding: 5rem 0; }
+    @media (min-width: 768px) { .insights { padding: 7rem 0; } }
+    .insights-head {
+      margin-bottom: 3rem; display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .insights-head {
+        margin-bottom: 4rem; flex-direction: row; align-items: flex-end; justify-content: space-between;
+      }
+    }
+    .insights h2 {
+      font-family: var(--font-display); max-width: 42rem;
+      font-size: clamp(1.85rem, 3.5vw, 3rem); font-weight: 600;
+      line-height: 1.12; letter-spacing: -0.01em; color: var(--brand);
+    }
+    .insights-grid { display: grid; gap: 2rem; }
+    @media (min-width: 768px) { .insights-grid { grid-template-columns: repeat(3, 1fr); } }
+    .blog-card { display: flex; flex-direction: column; }
+    .blog-card .img-zoom {
+      position: relative; display: block; margin-bottom: 1.25rem;
+      aspect-ratio: 16/10; overflow: hidden; background: var(--brand-deep);
+    }
+    .blog-card .img-zoom img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .blog-meta {
+      margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.75rem; color: var(--muted);
+    }
+    .blog-card h3 {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+      line-height: 1.35; color: var(--brand);
+    }
+    .blog-card h3 a:hover { color: var(--brand-mid); }
+    .blog-card .excerpt {
+      margin-top: 0.75rem; flex: 1; font-size: 0.875rem; line-height: 1.625; color: var(--muted);
+    }
+    .blog-card .read-more {
+      margin-top: 1.25rem; display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.875rem; font-weight: 500; color: var(--brand);
+    }
+    .blog-card .read-more .arr { transition: transform 0.3s; }
+    .blog-card:hover .read-more .arr { transform: translateX(4px); }
+
+    /* ========== CONTACT ========== */
+    .contact { background: #fff; padding: 5rem 0; }
+    @media (min-width: 768px) { .contact { padding: 7rem 0; } }
+    .contact-box {
+      display: grid; gap: 3rem;
+      border: 1px solid var(--line); background: var(--paper);
+      padding: 2rem;
+    }
+    @media (min-width: 768px) {
+      .contact-box { grid-template-columns: repeat(12, 1fr); padding: 3.5rem; }
+      .contact-main { grid-column: span 7; }
+      .contact-info { grid-column: span 5; }
+    }
+    @media (min-width: 1024px) { .contact-box { padding: 4rem; } }
+    .contact .eyebrow { font-size: 0.75rem; letter-spacing: 0.24em; margin-bottom: 1rem; }
+    .contact h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.85rem, 3.5vw, 3rem); font-weight: 600;
+      line-height: 1.12; letter-spacing: -0.01em; color: var(--brand);
+    }
+    .contact-ctas { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+    .contact-info {
+      display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;
+      border-top: 1px solid var(--line); padding-top: 2rem;
+      font-size: 0.875rem; line-height: 1.625; color: var(--brand);
+    }
+    @media (min-width: 768px) {
+      .contact-info {
+        border-top: none; border-left: 1px solid var(--line);
+        padding-top: 0; padding-left: 2.5rem;
+      }
+    }
+    .contact-info a:hover { color: var(--brand-mid); }
+
+    /* ========== FOOTER ========== */
+    .site-footer { background: var(--brand-deep); color: #fff; }
+    .footer-main {
+      display: grid; gap: 3rem; padding: 4rem 0;
+    }
+    @media (min-width: 768px) {
+      .footer-main { grid-template-columns: repeat(12, 1fr); gap: 2rem; padding: 5rem 0; }
+      .footer-brand { grid-column: span 4; }
+      .footer-nav { grid-column: span 2; }
+      .footer-links { grid-column: span 3; }
+      .footer-regional { grid-column: span 3; }
+    }
+    .footer-brand img { height: 2.75rem; width: auto; }
+    .footer-brand > p {
+      margin-top: 1.5rem; max-width: 20rem;
+      font-size: 0.875rem; line-height: 1.625; color: rgba(255,255,255,0.65);
+    }
+    .footer-contact { margin-top: 1.5rem; }
+    .footer-contact a {
+      display: block; font-size: 0.875rem; margin-bottom: 0.5rem;
+    }
+    .footer-contact a:hover { color: var(--accent); }
+    .footer-social { margin-top: 2rem; }
+    .footer-social-label {
+      margin-bottom: 0.75rem; font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
+    }
+    .footer-social-links {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-social-links a:hover { color: var(--accent); }
+    .footer-col ul { display: flex; flex-direction: column; gap: 0.625rem; }
+    .footer-col a {
+      font-size: 0.875rem; color: rgba(255,255,255,0.7);
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-bottom-inner {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      padding: 1.5rem 0; font-size: 0.75rem; color: rgba(255,255,255,0.45);
+    }
+    @media (min-width: 640px) {
+      .footer-bottom-inner {
+        flex-direction: row; align-items: center; justify-content: space-between;
+      }
+    }
+    .footer-legal { display: flex; gap: 1rem; }
+    .footer-legal a:hover { color: #fff; }
+  </style>
 </head>
 <body>
-  <a class="logo" href="#top" aria-label="Helium Solar" id="logoLink">
-    <img id="logoImg" src="https://www.heliumsolar.in/Content/assets/My-image/logo-white.png" alt="Helium Solar" />
-  </a>
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="header-top">
+      <div class="container-wide header-top-inner">
+        <p>Mon - Sat: 09:00 AM - 06:30 PM</p>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;">
+          <a href="mailto:sales@heliumsolar.in">sales@heliumsolar.in</a>
+          <a href="tel:+919194700477">+91 9194700477</a>
+          <a class="hide-sm" href="https://www.heliumsolar.in/Career" target="_blank" rel="noopener noreferrer">Solar Careers</a>
+          <a class="hide-sm" href="https://www.heliumsolar.in/Enquire" target="_blank" rel="noopener noreferrer">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="container-wide header-main">
+      <a href="/" class="logo" aria-label="Helium Solar home">
+        <img src="https://www.heliumsolar.in/UploadDoc/company/20251203025137_0.png" alt="Helium Solar" width="160" height="48" />
+      </a>
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="/" class="nav-link" aria-current="page">Home</a>
+        <a href="https://www.heliumsolar.in/About" class="nav-link" target="_blank" rel="noopener noreferrer">About</a>
+        <a href="https://www.heliumsolar.in/Service" class="nav-link" target="_blank" rel="noopener noreferrer">Services</a>
+        <a href="https://www.heliumsolar.in/Product" class="nav-link" target="_blank" rel="noopener noreferrer">Products</a>
+        <a href="https://www.heliumsolar.in/Project" class="nav-link" target="_blank" rel="noopener noreferrer">Projects</a>
+        <a href="https://www.heliumsolar.in/Updates" class="nav-link" target="_blank" rel="noopener noreferrer">Our Blog</a>
+        <a href="https://www.heliumsolar.in/Franchise" class="nav-link" target="_blank" rel="noopener noreferrer">Franchise</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://www.heliumsolar.in/Enquire" class="btn-enquire" target="_blank" rel="noopener noreferrer">For Enquiry</a>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-nav" class="mobile-nav">
+      <nav class="container-site" aria-label="Mobile">
+        <a href="/">Home</a>
+        <a href="https://www.heliumsolar.in/About" target="_blank" rel="noopener noreferrer">About</a>
+        <a href="https://www.heliumsolar.in/Service" target="_blank" rel="noopener noreferrer">Services</a>
+        <a href="https://www.heliumsolar.in/Product" target="_blank" rel="noopener noreferrer">Products</a>
+        <a href="https://www.heliumsolar.in/Project" target="_blank" rel="noopener noreferrer">Projects</a>
+        <a href="https://www.heliumsolar.in/Updates" target="_blank" rel="noopener noreferrer">Our Blog</a>
+        <a href="https://www.heliumsolar.in/Franchise" target="_blank" rel="noopener noreferrer">Franchise</a>
+        <a href="https://www.heliumsolar.in/Enquire" class="btn-mobile-enquire" target="_blank" rel="noopener noreferrer">For Enquiry</a>
+      </nav>
+    </div>
+  </header>
 
   <main id="top">
     <!-- HERO -->
-    <section id="hero">
-      <div class="hero-sticky">
-        <div class="hero-yellow" id="heroYellow"></div>
-        <div class="hero-photo" id="heroPhoto">
+    <section class="hero" aria-label="Hero" id="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-img" data-hero-img>
           <img src="https://www.heliumsolar.in/UploadDoc/slider/20260618102251_0.jpeg" alt="" />
-          <div class="hero-glow" id="heroGlow"></div>
-          <div class="hero-shade"></div>
         </div>
-        <div class="orbit-layer" id="orbitLayer"></div>
-        <h1 class="hero-h1" id="heroH1">
-          <span>India’s trusted solar EPC.</span>
-          <span class="dim">High-performance solar for homes, businesses, and industry since 2012.</span>
+        <div class="hero-grad-t"></div>
+        <div class="hero-grad-r"></div>
+      </div>
+      <div class="container-wide hero-content">
+        <h1>
+          <span class="hero-word-wrap"><span class="hero-word" data-hero-word>India's&nbsp;</span></span>
+          <span class="hero-word-wrap"><span class="hero-word" data-hero-word>Trusted&nbsp;</span></span>
+          <span class="hero-word-wrap"><span class="hero-word" data-hero-word>Solar&nbsp;</span></span>
+          <span class="hero-word-wrap"><span class="hero-word" data-hero-word>EPC&nbsp;</span></span>
+          <span class="hero-word-wrap"><span class="hero-word" data-hero-word>Company&nbsp;</span></span>
+          <span class="hero-word-wrap"><span class="hero-word" data-hero-word>Since&nbsp;</span></span>
+          <span class="hero-word-wrap"><span class="hero-word" data-hero-word>2012</span></span>
         </h1>
-        <div class="statement-wrap" id="statementWrap">
-          <div class="statement-card">
-            <p class="statement" id="statement"></p>
-          </div>
-        </div>
-        <h2 class="final-line" id="finalLine">Solar for everyone.</h2>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="spacer-grid">
-      <div class="about-sticky">
-        <div class="about-card" id="aboutCard">
-          <div class="about-fill" id="aboutFill"></div>
-          <div class="about-stage one" id="aboutOne">
-            <p>Energy demand keeps rising.</p>
-            <p>Businesses need cleaner,</p>
-            <p>dependable power every day.</p>
-          </div>
-          <div class="about-stage two" id="aboutTwo">
-            <p>Going solar is no longer</p>
-            <p>a future idea.</p>
-            <p>It’s how Indian homes</p>
-            <p>and factories cut costs</p>
-            <p>and stay resilient.</p>
-          </div>
-          <img class="about-photo" id="aboutPhoto" src="images/helium-circle.png" alt="Helium Solar — Solar For Every One" />
+        <p class="hero-body" data-hero-fade>
+          Delivering high-performance rooftop solar systems, commercial solar installations, and industrial solar power solutions across India since 2012.
+        </p>
+        <div class="hero-ctas" data-hero-fade>
+          <a href="https://www.heliumsolar.in/Enquire" class="btn btn-light btn-fill" target="_blank" rel="noopener noreferrer">
+            <span>Get Your Free Solar Site Survey</span><span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="https://www.youtube.com/watch?v=zzcW_CZCoB4" class="hero-video-link" target="_blank" rel="noopener noreferrer">Play Video</a>
         </div>
       </div>
-    </section>
-
-    <!-- FOUNDER / VIDEO -->
-    <section id="founder">
-      <div class="founder-sticky">
-        <video
-          id="founderVideo"
-          class="founder-video"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-          poster="https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Installation.jpg"
-        >
-          <source src="videos/helium-loop.mp4" type="video/mp4" />
-        </video>
-        <div class="founder-shade"></div>
-        <div class="founder-copy">
-          <p class="founder-quote" id="founderQuote"></p>
-          <h2 class="founder-label">Since 2012</h2>
-        </div>
+      <div class="scroll-hint motion-safe-only" data-hero-fade aria-hidden="true">
+        <span>Scroll</span>
+        <span class="scroll-indicator-dot"></span>
       </div>
     </section>
 
     <!-- PARTNERS -->
-    <section id="marquee">
-      <div class="section-pad">
-        <p class="marquee-title">PARTNERS</p>
-      </div>
-      <div class="marquee-row">
-        <div class="marquee-track left" id="row1"></div>
-      </div>
-      <div class="marquee-row">
-        <div class="marquee-track right" id="row2"></div>
+    <section class="partners" aria-label="Partner logos">
+      <div class="partners-overflow">
+        <div class="partners-track" id="partners-track">
+          <!-- logos duplicated via JS -->
+        </div>
       </div>
     </section>
 
-    <!-- SHOWCASE -->
-    <section id="visual-showcase">
-      <div class="section-pad">
-        <p class="showcase-eyebrow">Better solar starts with better engineering. Built to turn more sunlight into dependable energy.</p>
-        <div class="showcase-frame" id="showcaseFrame">
-          <img class="showcase-glow" aria-hidden="true" src="https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Installation.jpg" alt="" />
-          <figure class="showcase-figure" id="showcaseFigure">
-            <img src="https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Installation.jpg" alt="Helium Solar installation" />
+    <!-- SOLUTIONS -->
+    <section class="solutions" id="solutions" aria-label="Customized Solar Solutions for Every Energy Need">
+      <div class="solutions-chrome">
+        <div style="pointer-events:auto;min-width:0;">
+          <p class="eyebrow">WHAT WE OFFER</p>
+          <h2>Customized Solar Solutions for Every Energy Need</h2>
+        </div>
+        <p class="solutions-counter" id="sol-counter">
+          <span id="sol-current">01</span><span class="sep">/</span><span>06</span>
+        </p>
+      </div>
+
+      <div class="solutions-desktop" id="sol-desktop"></div>
+      <div class="solutions-mobile" id="sol-mobile"></div>
+    </section>
+
+    <!-- WHY CHOOSE -->
+    <section class="why" id="why-choose">
+      <div class="container-wide why-inner">
+        <div class="why-header">
+          <div class="why-header-title">
+            <p class="eyebrow">WHY CHOOSE US</p>
+            <h2>Why Helium Solar is Your Best Choice for Solar Energy</h2>
+          </div>
+          <div class="why-header-body">
+            <p>At Helium Solar, we provide end-to-end Solar Installation Services focused on efficiency, savings, and long-term performance. Whether you are a homeowner, business owner, or industrial unit, our customized solar power solutions are designed to meet your specific energy requirements. As a trusted Solar EPC Company in India, Helium Solar delivers reliable solutions, including site surveys, system design, installation, and long-term maintenance. From Rooftop Solar Installation to commercial and industrial projects, we ensure smooth execution, premium-grade components, and dependable performance for every solar energy system.</p>
+          </div>
+          <div class="why-header-cta">
+            <a href="https://www.heliumsolar.in/About" class="btn btn-secondary btn-fill" target="_blank" rel="noopener noreferrer" style="padding:0.625rem 1rem;font-size:0.75rem;">
+              <span>Know More</span><span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+        <div class="why-grid">
+          <div class="why-img-wrap">
+            <img src="https://www.heliumsolar.in/Content/assets/My-image/img4.jpg" alt="" data-why-img />
+            <div class="why-img-grad"></div>
+          </div>
+          <div class="why-benefits" data-benefits>
+            <ul class="benefit-list" id="benefit-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- USP -->
+    <section class="usp" id="usp">
+      <div class="container-wide">
+        <p class="eyebrow">Our USP</p>
+        <h2>Helium Solar - Your Trusted Partner for Complete Solar Solutions</h2>
+        <div class="usp-grid" id="usp-grid"></div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="process">
+      <div class="container-wide process-inner">
+        <div class="process-copy">
+          <p class="eyebrow">READY TO GO SOLAR ?</p>
+          <h2>Start Saving Today with Helium Solar</h2>
+          <p class="process-body">Getting a solar power system for your home, commercial establishment, or industrial facility is now easier and more affordable than ever. At Helium Solar, we simplify your transition to solar energy with a hassle-free process designed for maximum energy savings and long-term efficiency.</p>
+          <div class="process-steps">
+            <div class="process-rail" aria-hidden="true">
+              <div class="process-progress" id="process-progress"></div>
+            </div>
+            <ol id="process-steps-list"></ol>
+          </div>
+        </div>
+        <div class="process-media">
+          <div class="process-media-frame">
+            <img id="process-img" src="https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Installation.jpg" alt="" />
+            <div class="process-media-grad"></div>
+            <div class="process-media-caption">
+              <p id="process-caption-title">Connect With Our Experts</p>
+              <span><span id="process-caption-num">01</span><span class="dim"> / 05</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINANCING -->
+    <section class="financing" id="financing">
+      <div class="container-wide financing-top">
+        <div class="financing-copy">
+          <p class="eyebrow">EASY SOLAR FINANCING</p>
+          <h2>Helium Collateral-Free Solar Loan</h2>
+          <p>Go solar without financial stress. Get access to clean, renewable energy with our easy, collateral-free financing options.</p>
+          <a href="https://www.heliumsolar.in/Enquire" class="btn btn-primary btn-fill" target="_blank" rel="noopener noreferrer">
+            <span>Apply Now</span><span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="financing-hero-img">
+          <img src="https://www.heliumsolar.in/Content/assets/My-image/loanimg2.jpg" alt="Helium Collateral-Free Solar Loan" />
+        </div>
+      </div>
+      <div class="container-wide loan-steps" id="loan-steps"></div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials" aria-roledescription="carousel">
+      <div class="container-wide">
+        <p class="eyebrow">TESTIMONIALS</p>
+        <div class="testimonials-head">
+          <h2>Our Customers Speak For Us</h2>
+          <div class="testi-controls" role="group" aria-label="Testimonial controls">
+            <button type="button" id="testi-prev" aria-label="Previous testimonial">←</button>
+            <button type="button" id="testi-next" aria-label="Next testimonial">→</button>
+          </div>
+        </div>
+        <div class="testi-body" id="testi-body">
+          <div class="testi-photo">
+            <img id="testi-img" src="" alt="" />
+          </div>
+          <figure class="testi-quote">
+            <blockquote id="testi-quote"></blockquote>
+            <figcaption>
+              <p class="name" id="testi-name"></p>
+              <p class="role" id="testi-role"></p>
+              <p class="count" id="testi-count"></p>
+            </figcaption>
           </figure>
         </div>
-        <h2 class="showcase-headline">Rooftop to MW solar farms — proven installations powering India</h2>
-        <p class="showcase-body">From residential rooftops to industrial plants for NTPC, JSW, Blue Dart, and more — Helium Solar delivers end-to-end EPC.</p>
+        <div class="testi-tabs" role="tablist" aria-label="Select testimonial" id="testi-tabs"></div>
       </div>
     </section>
 
-    <!-- PILLARS -->
-    <section id="pillars">
-      <article class="pillar stone">
-        <div class="pillar-inner">
-          <h1>Savings</h1>
-          <div>
-            <p class="label">Impressive ROI</p>
-            <p class="body">Efficient solar power solutions designed for maximum savings and significant reductions in electricity bills.</p>
-          </div>
-        </div>
-      </article>
-      <article class="pillar clay">
-        <div class="pillar-inner">
-          <h1>Support</h1>
-          <div>
-            <p class="label">End-to-End EPC</p>
-            <p class="body">Site surveys, system design, installation, documentation, and long-term O&M from one trusted Kanpur-based partner.</p>
-          </div>
-        </div>
-      </article>
-      <article class="pillar dusk">
-        <div class="pillar-inner">
-          <h1>Reliability</h1>
-          <div>
-            <p class="label">Built to Perform</p>
-            <p class="body">Premium-grade components and professional maintenance for uninterrupted, dependable solar power year after year.</p>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <!-- CLOSING -->
-    <section id="closing-vision">
-      <p class="closing-title">More Sun.
-More Savings.</p>
-      <p class="closing-body">Getting solar for your home, commercial space, or industrial facility is easier than ever. Connect with Helium Solar for a free site survey and start saving with clean energy.</p>
-      <p class="closing-contact">
-        <a href="tel:+919194700477">+91 9194700477</a> ·
-        <a href="mailto:sales@heliumsolar.in">sales@heliumsolar.in</a>
-      </p>
-      <form id="contactForm">
-        <label>
-          <span>Name</span>
-          <input name="name" required placeholder="Your name" />
-        </label>
-        <label>
-          <span class="upper">Email</span>
-          <input name="email" type="email" required placeholder="you@company.com" />
-        </label>
-        <label>
-          <span class="upper">Message</span>
-          <textarea name="message" rows="3" required placeholder="Tell us about your site or energy needs..."></textarea>
-        </label>
-        <button class="submit" type="submit">SUBMIT</button>
-      </form>
-    </section>
-
-    <footer>
-      <img class="footer-logo" src="https://www.heliumsolar.in/UploadDoc/company/20251203025137_0.png" alt="Helium Solar" />
-      <p class="footer-address">Helium Tower, Plot No 16, Amritpuram, New Azad Nagar, Kanpur, UP</p>
-      <div class="footer-bar">
-        <a href="https://www.heliumsolar.in" target="_blank" rel="noreferrer">©2026 Helium Solar</a>
-        <a href="#top" id="backTop">Back to top</a>
+    <!-- PROJECTS -->
+    <section class="projects" id="projects">
+      <div class="container-wide projects-head">
+        <h2>Helium Solar — proven installations from rooftop homes to MW solar farms powering India.</h2>
+        <a href="https://www.heliumsolar.in/Project" class="btn btn-light btn-fill" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;">
+          <span>Projects</span><span class="arrow" aria-hidden="true">→</span>
+        </a>
       </div>
-    </footer>
+      <div class="container-wide projects-grid" id="projects-grid"></div>
+      <div class="projects-row-wrap">
+        <div class="projects-row" id="projects-row" data-project-row></div>
+      </div>
+    </section>
+
+    <!-- INSIGHTS -->
+    <section class="insights" id="insights">
+      <div class="container-wide insights-head">
+        <h2>Insights on Solar Energy and Sustainable Living</h2>
+        <a href="https://www.heliumsolar.in/Updates" class="btn btn-secondary btn-fill" target="_blank" rel="noopener noreferrer">
+          <span>View All Blog</span><span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="container-wide insights-grid" id="insights-grid"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="container-wide">
+        <div class="contact-box">
+          <div class="contact-main">
+            <p class="eyebrow">Contact Us</p>
+            <h2>Get Your Free Solar Site Survey</h2>
+            <div class="contact-ctas">
+              <a href="https://www.heliumsolar.in/Enquire" class="btn btn-primary btn-fill" target="_blank" rel="noopener noreferrer">
+                <span>Get Your Free Solar Site Survey</span><span class="arrow" aria-hidden="true">→</span>
+              </a>
+              <a href="https://www.heliumsolar.in/Enquire" class="btn btn-secondary btn-fill" target="_blank" rel="noopener noreferrer">
+                <span>For Enquiry</span><span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+          <div class="contact-info">
+            <p>Helium Tower, Plot No 16, Amritpuram, New Azad Nagar, Kanpur, UP</p>
+            <a href="tel:+919194700477">+91 9194700477</a>
+            <a href="mailto:sales@heliumsolar.in">sales@heliumsolar.in</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-<script>
-(function () {
-  const ASSETS = {
-    logo: "https://www.heliumsolar.in/UploadDoc/company/20251203025137_0.png",
-    logoWhite: "https://www.heliumsolar.in/Content/assets/My-image/logo-white.png",
-    tiles: [
-      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Residential%20Solar%20Solutions.jpg",
-      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Commercial%20Solar%20Solutions.jpg",
-      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Industrial%20Solar%20Solutions.jpg",
-      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Atta%20Chakki.jpg",
-      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20Kits.jpg",
-      "https://www.heliumsolar.in/Content/Website-Image-new/Home%20Page/Solar%20O&M%20Asset%20Management.jpg",
-      "https://www.heliumsolar.in/Content/assets/My-image/img4.jpg",
-      "https://www.heliumsolar.in/Content/assets/My-image/img1.jpg",
-      "https://www.heliumsolar.in/Content/assets/My-image/img2.jpg",
-      "https://www.heliumsolar.in/UploadDoc/product/20251207021244_0.jpeg",
-      "https://www.heliumsolar.in/UploadDoc/product/20251207020910_0.jpeg",
-      "https://www.heliumsolar.in/UploadDoc/product/20251207021414_0.jpeg"
-    ],
-    partners: [
-      "https://www.heliumsolar.in/UploadDoc/partner/20251129043314_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251018170448_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251018170421_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251018170355_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251018170332_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251018165142_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251018165345_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251018165459_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251128224248_0.png",
-      "https://www.heliumsolar.in/UploadDoc/partner/20251018170148_0.png"
-    ]
-  };
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container-wide footer-main">
+      <div class="footer-brand">
+        <img src="https://www.heliumsolar.in/Content/assets/My-image/logo-white.png" alt="Helium Solar" width="160" height="48" />
+        <p>Helium Tower, Plot No 16, Amritpuram, New Azad Nagar, Kanpur, UP</p>
+        <div class="footer-contact">
+          <a href="tel:+919194700477">+91 9194700477</a>
+          <a href="mailto:sales@heliumsolar.in">sales@heliumsolar.in</a>
+        </div>
+        <div class="footer-social">
+          <p class="footer-social-label">Follow Us</p>
+          <div class="footer-social-links">
+            <a href="https://www.facebook.com/heliumrenewablesenergy" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/helium_solar/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://in.linkedin.com/company/heliumsolar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://youtube.com/@heliumsolarsolution?si=vf8VKG0i-e_LJUtn" target="_blank" rel="noopener noreferrer">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-nav footer-col">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="https://www.heliumsolar.in/About" target="_blank" rel="noopener noreferrer">About</a></li>
+          <li><a href="https://www.heliumsolar.in/Service" target="_blank" rel="noopener noreferrer">Services</a></li>
+          <li><a href="https://www.heliumsolar.in/Product" target="_blank" rel="noopener noreferrer">Products</a></li>
+          <li><a href="https://www.heliumsolar.in/Project" target="_blank" rel="noopener noreferrer">Projects</a></li>
+          <li><a href="https://www.heliumsolar.in/Updates" target="_blank" rel="noopener noreferrer">Our Blog</a></li>
+          <li><a href="https://www.heliumsolar.in/Franchise" target="_blank" rel="noopener noreferrer">Franchise</a></li>
+        </ul>
+      </div>
+      <div class="footer-links footer-col">
+        <ul>
+          <li><a href="https://www.heliumsolar.in/Residential" target="_blank" rel="noopener noreferrer">RESIDENTIAL</a></li>
+          <li><a href="https://www.heliumsolar.in/Industrial" target="_blank" rel="noopener noreferrer">INDUSTRIAL</a></li>
+          <li><a href="https://www.heliumsolar.in/Service" target="_blank" rel="noopener noreferrer">SERVICES</a></li>
+          <li><a href="https://www.heliumsolar.in/Product" target="_blank" rel="noopener noreferrer">PRODUCT</a></li>
+          <li><a href="https://www.heliumsolar.in/Contact" target="_blank" rel="noopener noreferrer">Customer Service</a></li>
+          <li><a href="https://www.heliumsolar.in/Service" target="_blank" rel="noopener noreferrer">Installation Process</a></li>
+          <li><a href="https://www.heliumsolar.in/Service" target="_blank" rel="noopener noreferrer">Maintenance Plans</a></li>
+          <li><a href="https://www.heliumsolar.in/Contact" target="_blank" rel="noopener noreferrer">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-regional footer-col">
+        <ul>
+          <li><a href="https://www.heliumsolar.in/Solar-In-Agra" target="_blank" rel="noopener noreferrer">Solar In Agra</a></li>
+          <li><a href="https://www.heliumsolar.in/Solar-In-Bareilly" target="_blank" rel="noopener noreferrer">Solar In Bareilly</a></li>
+          <li><a href="https://www.heliumsolar.in/Solar-In-Gurugram" target="_blank" rel="noopener noreferrer">Solar In Gurugram</a></li>
+          <li><a href="https://www.heliumsolar.in/Solar-In-Kannauj" target="_blank" rel="noopener noreferrer">Solar In Kannauj</a></li>
+          <li><a href="https://www.heliumsolar.in/Solar-In-Lucknow" target="_blank" rel="noopener noreferrer">Solar In Lucknow</a></li>
+          <li><a href="https://www.heliumsolar.in/Solar-In-Noida" target="_blank" rel="noopener noreferrer">Solar In Noida</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container-wide footer-bottom-inner">
+        <p>©2026 Helium Solar</p>
+        <div class="footer-legal">
+          <a href="https://www.heliumsolar.in/PrivacyPolicy.pdf" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>
+          <a href="https://www.heliumsolar.in/PrivacyPolicy.pdf" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  const SIZES = [
-    [210,148],[176,124],[196,138],[158,112],[188,132],[168,118],
-    [200,140],[150,108],[182,128],[164,116],[192,136],[170,120]
-  ];
+  <script>
+  (function () {
+    "use strict";
 
-  const STATEMENT = "We’re delivering rooftop, commercial, and industrial solar across India—built for savings, reliability, and long-term performance.";
-  const FOUNDER = "At Helium Solar, we provide end-to-end solar installation focused on efficiency, savings, and long-term performance for homes, businesses, and industry.";
+    var CHECK = "https://www.heliumsolar.in/Content/assets/My-image/check3.svg";
+    var ORIGIN = "https://www.heliumsolar.in";
 
-  /* ---------- helpers ---------- */
-  function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
-  function map(v, a, b, c, d) {
-    if (a === b) return c;
-    const t = clamp((v - a) / (b - a), 0, 1);
-    return c + (d - c) * t;
-  }
-  function sectionProgress(el) {
-    const rect = el.getBoundingClientRect();
-    const total = el.offsetHeight - window.innerHeight;
-    if (total <= 0) return 0;
-    return clamp(-rect.top / total, 0, 1);
-  }
-  function wrapWords(el, text) {
-    el.innerHTML = text.split(/\s+/).map(function (w) {
-      return '<span class="word">' + w + '</span>';
-    }).join(' ');
-    return el.querySelectorAll('.word');
-  }
-
-  /* ---------- native scroll (reliable) ---------- */
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  document.getElementById('backTop').addEventListener('click', function (e) {
-    e.preventDefault();
-    scrollToTop();
-  });
-  document.getElementById('logoLink').addEventListener('click', function (e) {
-    e.preventDefault();
-    scrollToTop();
-  });
-
-  /* ---------- build orbit tiles ---------- */
-  const orbitLayer = document.getElementById('orbitLayer');
-  const tiles = ASSETS.tiles.map(function (src, i) {
-    const img = document.createElement('img');
-    img.className = 'orbit-tile';
-    img.src = src;
-    img.alt = '';
-    const size = SIZES[i % SIZES.length];
-    img.dataset.w = size[0];
-    img.dataset.h = size[1];
-    img.dataset.angle = String((i / ASSETS.tiles.length) * Math.PI * 2 - Math.PI / 2);
-    img.style.width = size[0] + 'px';
-    img.style.height = size[1] + 'px';
-    orbitLayer.appendChild(img);
-    return img;
-  });
-
-  /* ---------- word reveals ---------- */
-  const statementWords = wrapWords(document.getElementById('statement'), STATEMENT);
-  const founderWords = wrapWords(document.getElementById('founderQuote'), FOUNDER);
-
-  /* ---------- partners ---------- */
-  function fillMarquee(el, urls) {
-    const loop = urls.concat(urls, urls, urls);
-    el.innerHTML = loop.map(function (src) {
-      return '<div class="partner-card"><img src="' + src + '" alt="" /></div>';
-    }).join('');
-  }
-  fillMarquee(document.getElementById('row1'), ASSETS.partners.slice(0, 5));
-  fillMarquee(document.getElementById('row2'), ASSETS.partners.slice(5));
-
-  /* ---------- form ---------- */
-  document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    e.target.querySelector('.submit').textContent = 'SENT';
-  });
-
-  /* ---------- force local video autoplay ---------- */
-  const founderVideo = document.getElementById('founderVideo');
-  function playFounderVideo() {
-    if (!founderVideo) return;
-    founderVideo.muted = true;
-    founderVideo.playsInline = true;
-    const playPromise = founderVideo.play();
-    if (playPromise && playPromise.catch) {
-      playPromise.catch(function () {
-        // Retry once user scrolls / interacts
-      });
+    function prefersReducedMotion() {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     }
-  }
-  playFounderVideo();
-  document.addEventListener('pointerdown', playFounderVideo, { once: true });
-  document.addEventListener('touchstart', playFounderVideo, { once: true });
-  document.addEventListener('scroll', playFounderVideo, { once: true, passive: true });
-  if ('IntersectionObserver' in window && founderVideo) {
-    const io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) playFounderVideo();
-      });
-    }, { threshold: 0.2 });
-    io.observe(founderVideo);
-  }
 
-  /* ---------- main RAF ---------- */
-  let orbitSpin = 0;
-  let last = performance.now();
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
 
-  const els = {
-    hero: document.getElementById('hero'),
-    about: document.getElementById('spacer-grid'),
-    founder: document.getElementById('founder'),
-    showcase: document.getElementById('visual-showcase'),
-    yellow: document.getElementById('heroYellow'),
-    photo: document.getElementById('heroPhoto'),
-    glow: document.getElementById('heroGlow'),
-    h1: document.getElementById('heroH1'),
-    statement: document.getElementById('statementWrap'),
-    final: document.getElementById('finalLine'),
-    aboutFill: document.getElementById('aboutFill'),
-    aboutOne: document.getElementById('aboutOne'),
-    aboutTwo: document.getElementById('aboutTwo'),
-    aboutPhoto: document.getElementById('aboutPhoto'),
-    aboutCard: document.getElementById('aboutCard'),
-    showcaseFigure: document.getElementById('showcaseFigure'),
-    logoImg: document.getElementById('logoImg')
-  };
+    /* ---- DATA (from lib/content.ts) ---- */
+    var PARTNERS = [
+      ORIGIN + "/UploadDoc/partner/20251129043314_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018170448_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018170421_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018170355_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018170332_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018165142_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018165345_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018165459_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018165913_0.jpeg",
+      ORIGIN + "/UploadDoc/partner/20251128224248_0.png",
+      ORIGIN + "/UploadDoc/partner/20251018170148_0.png"
+    ];
 
-  function revealWords(words, progress, start, end, dim, accent) {
-    const n = words.length;
-    for (let i = 0; i < n; i++) {
-      const span = (end - start) / n;
-      const from = start + i * span;
-      const to = from + span * 0.85;
-      const o = map(progress, from, to, dim, 1);
-      words[i].style.opacity = String(o);
-      if (accent) {
-        if (progress >= to) words[i].style.color = '#ffffff';
-        else if (progress >= from) words[i].style.color = accent;
-        else words[i].style.color = 'rgba(255,255,255,0.28)';
+    var SOLUTIONS = [
+      {
+        title: "Residential Solar",
+        description: "Residential Solar Solutions for Homes, Villas & Housing Societies",
+        image: ORIGIN + "/Content/Website-Image-new/Home%20Page/Residential%20Solar%20Solutions.jpg",
+        href: ORIGIN + "/Residential"
+      },
+      {
+        title: "Commercial Solar",
+        description: "Commercial Solar Solutions for Hospitals, Colleges, Hotels & Corporate Buildings",
+        image: ORIGIN + "/Content/Website-Image-new/Home%20Page/Commercial%20Solar%20Solutions.jpg",
+        href: ORIGIN + "/ProductDetails"
+      },
+      {
+        title: "Industrial Solar",
+        description: "Industrial Solar Solutions for Manufacturing, Food Processing & More",
+        image: ORIGIN + "/Content/Website-Image-new/Home%20Page/Industrial%20Solar%20Solutions.jpg",
+        href: ORIGIN + "/Industrial"
+      },
+      {
+        title: "Solar Machinery",
+        description: "Solar Aata Chakki, Solar Pumps & Oil Expeller Solutions",
+        image: ORIGIN + "/Content/Website-Image-new/Home%20Page/Solar%20Atta%20Chakki.jpg",
+        href: ORIGIN + "/Product"
+      },
+      {
+        title: "Solar Kits",
+        description: "Complete Solar Kits from 1KW to 10KW for Homes & Businesses",
+        image: ORIGIN + "/Content/Website-Image-new/Home%20Page/Solar%20Kits.jpg",
+        href: ORIGIN + "/ProductDetails#SolarKit"
+      },
+      {
+        title: "Solar O&M",
+        description: "O&M Asset Management of Solar Plant",
+        image: ORIGIN + "/Content/Website-Image-new/Home%20Page/Solar%20O%26M%20Asset%20Management.jpg",
+        href: ORIGIN + "/Service"
       }
+    ];
+
+    var BENEFITS = [
+      { title: "Impressive Return on Investment (ROI)", body: "Efficient solar power solutions for maximum savings." },
+      { title: "Significant Cost Reductions", body: "Reduce electricity bills with efficient solar energy." },
+      { title: "Government Benefits", body: "Leverage subsidies, incentives, and solar policies." },
+      { title: "Energy Stability", body: "Ensure uninterrupted and reliable solar power." },
+      { title: "Low Maintenance", body: "Enjoy low-maintenance solar systems with easy upkeep." },
+      { title: "Enhanced Brand Reputation", body: "Showcase your commitment to renewable and green energy." },
+      { title: "Environmental Impact", body: "Reduce carbon footprint and support clean energy goals." }
+    ];
+
+    var USP_ITEMS = [
+      {
+        title: "Your One-Stop Destination for Solar Solutions in Kanpur & Across India.",
+        body: "From consultation and system planning to installation and maintenance, we provide end-to-end solar services for homes, commercial spaces, and industrial units."
+      },
+      {
+        title: "Affordable Solar Financing Solutions",
+        body: "Our flexible financing options make Solar Energy for Homes and businesses more accessible without compromising on product quality or long-term performance."
+      },
+      {
+        title: "Customized Solar Design for Maximum Efficiency",
+        body: "Our experienced team combines technical expertise and innovation to deliver high-performance solutions for residential, commercial, and industrial requirements."
+      },
+      {
+        title: "Reliable Performance with Long-Term Expert Support",
+        body: "Our dedicated team ensures consistent performance through professional maintenance services and dependable support for every solar power project."
+      }
+    ];
+
+    var PROCESS_STEPS = [
+      { number: "01", title: "Connect With Our Experts" },
+      { number: "02", title: "Free Solar Site Assessment" },
+      { number: "03", title: "Customized Solar Design & System Planning" },
+      { number: "04", title: "Documentation & Project Approval" },
+      { number: "05", title: "Fast Solar Installation" }
+    ];
+
+    var LOAN_STEPS = [
+      {
+        title: "Submit Loan form",
+        body: "“Fill out a simple form with your details to start your solar journey.”",
+        cta: "Step 1",
+        image: ORIGIN + "/Content/assets/My-image/loanform.jpg"
+      },
+      {
+        title: "Credit Assessment & Site visit",
+        body: "“We evaluate your eligibility and conduct a site visit to plan your solar setup.”",
+        cta: "Step 2",
+        image: ORIGIN + "/Content/assets/My-image/loanapp.jpg"
+      },
+      {
+        title: "Loan Approved",
+        body: "“Get quick approval and start enjoying clean, renewable energy at your home or business.”",
+        cta: "Step 3",
+        image: ORIGIN + "/Content/assets/My-image/loanimg2.jpg"
+      }
+    ];
+
+    var TESTIMONIALS = [
+      {
+        name: "Deepak Agarwal",
+        role: "Shiv Krishna Polytex, Managing Director",
+        quote: "Choosing Helium Solar for our industrial solar project was definitely the right decision. Their commitment, technical knowledge, and after-sales support have been excellent. The plant is running smoothly and delivering exactly the savings we were promised.",
+        image: ORIGIN + "/UploadDoc/Testimonial/20260622080134_0.png"
+      },
+      {
+        name: "Amit Deshmukh",
+        role: "Cold Storage Owner – Nagpur, India",
+        quote: "Before installing solar, our factory electricity bills were very high every month. After connecting with Helium Solar, the entire process became very easy for us. Their team guided us properly from design to installation, and now we are getting excellent savings. The plant performance has been very good.",
+        image: ORIGIN + "/UploadDoc/Testimonial/20260622080029_0.png"
+      },
+      {
+        name: "Atul Singh",
+        role: "Small Business Owner – Lucknow, India",
+        quote: "What I liked most was their professional approach and support throughout the project. The installation work was completed smoothly without affecting our factory operations. We are happy with the quality and overall service provided by Helium Solar.",
+        image: ORIGIN + "/UploadDoc/Testimonial/20260622075930_0.png"
+      },
+      {
+        name: "Balvir Singh",
+        role: "Environmental Advocate – Delhi, India",
+        quote: "Helium Solar’s team was very responsive whenever we had questions. They handled the project professionally and kept everything transparent from start to finish. The solar plant is performing efficiently and helping us save a good amount every month.",
+        image: ORIGIN + "/UploadDoc/Testimonial/20260622075820_0.png"
+      }
+    ];
+
+    var PROJECTS = [
+      { title: "1 MW DC Solar Plant, Kanpur Plastipack Limited (KPL)", image: ORIGIN + "/UploadDoc/product/20261008083416_0.jpeg" },
+      { title: "200kWp Solar Plant, Shri Baleshwar ji International Pvt.Ltd.", image: ORIGIN + "/UploadDoc/product/20260429021428_0.png" },
+      { title: "250 KWp rooftop solar power plant, Rajeshwari Foods & Spices Pvt. Ltd. (Waah India)", image: ORIGIN + "/UploadDoc/product/20260429020905_0.png" },
+      { title: "200kWp Solar Plant, Vikash sortex industries", image: ORIGIN + "/UploadDoc/product/20260414224950_0.png" },
+      { title: "150MW solar plant, NTPC", image: ORIGIN + "/UploadDoc/product/20251219025947_0.jpg" },
+      { title: "6MW Solar Plant, JSW", image: ORIGIN + "/UploadDoc/product/20251219025645_0.jpeg" },
+      { title: "100MW Solar Plant, NTPC", image: ORIGIN + "/UploadDoc/product/20251219025516_0.jpeg" },
+      { title: "56MW Solar plant, NTPC", image: ORIGIN + "/UploadDoc/product/20251219020643_0.jpeg" },
+      { title: "155kWp Solar Plant, Siliguri Bardana Company", image: ORIGIN + "/UploadDoc/product/20251219015739_0.jpeg" },
+      { title: "150kWp Solar Plant, Gitanjali Cold Store", image: ORIGIN + "/UploadDoc/product/20251219015531_0.jpeg" },
+      { title: "500kWp Solar Plant Narayan & Sons Rice Mill", image: ORIGIN + "/UploadDoc/product/20251219014928_0.jpeg" },
+      { title: "800kWp Solar Plant, JSW Steel", image: ORIGIN + "/UploadDoc/product/20251219014223_0.jpeg" }
+    ];
+
+    var INSIGHTS = [
+      {
+        title: "1 MW Solar Project in Kanpur: Helium Solar Commissions Kanpur Plastipack Plant",
+        excerpt: "Helium Solar has successfully commissioned a 1 MW DC industrial rooftop solar project at Kanpur Plastipack Limited in Rania, Kanpur Dehat. Explore this project milestone and key considerations for factory owners planning industrial solar in Uttar Pradesh.",
+        date: "Oct 09 2026",
+        author: "Admin",
+        image: ORIGIN + "/UploadDoc/Blog/20261009081008_0.jpeg",
+        href: ORIGIN + "/UpdatesDetails/168/1-mw-solar-project-in-kanpur-helium-solar-commissions-kanpur-plastipack-plant"
+      },
+      {
+        title: "Solar Panels Installed but Electricity Bill Still High? 7 Reasons & Solutions in India (2026)",
+        excerpt: "Installed rooftop solar but still receiving a high electricity bill? Discover seven common reasons, from low solar generation to missing net metering credits, and practical solutions for Indian homes with Helium Solar.",
+        date: "Oct 08 2026",
+        author: "Admin",
+        image: ORIGIN + "/UploadDoc/Blog/20261008122429_0.jpeg",
+        href: ORIGIN + "/UpdatesDetails/167/solar-panels-installed-but-electricity-bill-still-high-7-reasons-solutions-in-india-2026"
+      },
+      {
+        title: "3 kW Solar System Price in Uttar Pradesh 2026: Subsidy & Savings",
+        excerpt: "Planning rooftop solar for your home in Uttar Pradesh? Explore 3 kW solar system costs, eligible subsidy support of up to ₹1.08 lakh, electricity savings and installation requirements with Helium Solar—your solar partner since 2012.",
+        date: "Oct 07 2026",
+        author: "Admin",
+        image: ORIGIN + "/UploadDoc/Blog/20261007061828_0.jpeg",
+        href: ORIGIN + "/UpdatesDetails/166/3-kw-solar-system-price-in-uttar-pradesh-2026-subsidy-savings"
+      }
+    ];
+
+    /* ---- HEADER ---- */
+    var header = document.getElementById("site-header");
+    var menuToggle = document.getElementById("menu-toggle");
+    var menuOpen = false;
+
+    function updateHeader() {
+      var scrolled = window.scrollY > 24;
+      header.classList.toggle("is-scrolled", scrolled || menuOpen);
+      header.classList.toggle("is-open", menuOpen);
     }
-  }
 
-  function update(now) {
-    const dt = (now - last) / 1000;
-    last = now;
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    updateHeader();
 
-    const hp = sectionProgress(els.hero);
-    const ap = sectionProgress(els.about);
-    const fp = sectionProgress(els.founder);
+    menuToggle.addEventListener("click", function () {
+      menuOpen = !menuOpen;
+      menuToggle.setAttribute("aria-expanded", menuOpen ? "true" : "false");
+      menuToggle.setAttribute("aria-label", menuOpen ? "Close menu" : "Open menu");
+      document.body.style.overflow = menuOpen ? "hidden" : "";
+      updateHeader();
+    });
 
-    // Hero photo / yellow
-    const photoOp = map(hp, 0.16, 0.36, 1, 0);
-    const photoScale = map(hp, 0, 0.36, 1, 1.08);
-    const yellowOp = map(hp, 0.14, 0.34, 0, 1);
-    const glowOp = map(hp, 0, 0.3, 0.25, 0.7);
-    els.photo.style.opacity = String(photoOp);
-    els.photo.style.transform = 'scale(' + photoScale + ')';
-    els.yellow.style.opacity = String(yellowOp);
-    els.glow.style.opacity = String(glowOp);
+    document.querySelectorAll("#mobile-nav a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        menuOpen = false;
+        document.body.style.overflow = "";
+        updateHeader();
+      });
+    });
 
-    // Headline
-    const h1Op = map(hp, 0.08, 0.24, 1, 0);
-    const h1Y = map(hp, 0, 0.2, 0, -24);
-    els.h1.style.opacity = String(h1Op);
-    els.h1.style.transform = 'translateY(' + h1Y + 'px)';
+    /* ---- PARTNERS ---- */
+    var track = document.getElementById("partners-track");
+    var logos = PARTNERS.concat(PARTNERS);
+    track.innerHTML = logos.map(function (src) {
+      return '<div class="partner-logo"><img src="' + src + '" alt="" width="144" height="56" loading="lazy" /></div>';
+    }).join("");
 
-    // Statement (readable card)
-    const stOp = map(hp, 0.32, 0.42, 0, 1) * map(hp, 0.64, 0.76, 1, 0);
-    els.statement.style.opacity = String(stOp);
-    revealWords(statementWords, hp, 0.34, 0.62, 0.28);
+    /* ---- SOLUTIONS ---- */
+    var solActive = 0;
+    var solHovered = null;
+    var solDesktop = document.getElementById("sol-desktop");
+    var solMobile = document.getElementById("sol-mobile");
+    var solCurrent = document.getElementById("sol-current");
 
-    // Final
-    const fOp = map(hp, 0.72, 0.88, 0, 1);
-    const fY = map(hp, 0.72, 0.9, 28, 0);
-    els.final.style.opacity = String(fOp);
-    els.final.style.transform = 'translateY(' + fY + 'px)';
-
-    // Orbit
-    if (hp > 0.12 && hp < 0.82) orbitSpin += dt * 0.18;
-    const expand = map(hp, 0.12, 0.38, 0.08, 1);
-    const tileOp = map(hp, 0.1, 0.26, 0, 1) * map(hp, 0.64, 0.8, 1, 0);
-    const tileScale = map(hp, 0.1, 0.38, 0.45, 1);
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const base = Math.min(vw * 0.36, vh * 0.36, 420);
-    const radiusX = base * 1.15;
-    const radiusY = base;
-
-    for (let i = 0; i < tiles.length; i++) {
-      const tile = tiles[i];
-      const w = Number(tile.dataset.w);
-      const h = Number(tile.dataset.h);
-      const angle = Number(tile.dataset.angle) + orbitSpin;
-      const x = Math.cos(angle) * radiusX * expand - w / 2;
-      const y = Math.sin(angle) * radiusY * expand - h / 2;
-      tile.style.opacity = String(tileOp);
-      tile.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + tileScale + ')';
+    function solFocus() {
+      return solHovered !== null ? solHovered : solActive;
     }
 
-    // About card
-    const fillH = map(ap, 0, 0.34, 34, 86);
-    const fillH2 = map(ap, 0.34, 0.48, fillH, 100);
-    els.aboutFill.style.height = fillH2 + '%';
-    els.aboutOne.style.opacity = String(map(ap, 0.2, 0.32, 1, 0));
-    els.aboutTwo.style.opacity = String(map(ap, 0.38, 0.5, 0, 1) * map(ap, 0.62, 0.74, 1, 0));
-    const photoOp = map(ap, 0.68, 0.82, 0, 1);
-    els.aboutPhoto.style.opacity = String(photoOp);
-    els.aboutFill.style.opacity = String(1 - photoOp);
-    if (photoOp > 0.2) {
-      els.aboutOne.style.opacity = '0';
-      els.aboutTwo.style.opacity = '0';
+    function renderSolutions() {
+      var focus = solFocus();
+      solCurrent.textContent = pad(focus + 1);
+
+      solDesktop.innerHTML = SOLUTIONS.map(function (item, i) {
+        var isFocus = i === focus;
+        return (
+          '<a href="' + item.href + '" target="_blank" rel="noopener noreferrer" class="sol-panel' + (isFocus ? " is-focus" : "") + '" data-sol-i="' + i + '"' + (isFocus ? ' aria-current="true"' : "") + ">" +
+            '<img src="' + item.image + '" alt="' + item.description.replace(/"/g, "&quot;") + '" loading="' + (i < 2 ? "eager" : "lazy") + '" />' +
+            '<div class="sol-overlay"></div>' +
+            '<div class="sol-collapsed">' +
+              '<p class="sol-num">' + pad(i + 1) + "</p>" +
+              "<h3>" + item.title + "</h3>" +
+            "</div>" +
+            '<div class="sol-expanded">' +
+              '<p class="sol-num">' + pad(i + 1) + "</p>" +
+              "<h3>" + item.title + "</h3>" +
+              "<p>" + item.description + "</p>" +
+              '<span class="sol-cta">' + item.title + ' <span class="arr" aria-hidden="true">→</span></span>' +
+            "</div>" +
+          "</a>"
+        );
+      }).join("");
+
+      solDesktop.querySelectorAll(".sol-panel").forEach(function (panel) {
+        var i = +panel.getAttribute("data-sol-i");
+        panel.addEventListener("mouseenter", function () {
+          solHovered = i;
+          solActive = i;
+          updateSolPanels();
+        });
+        panel.addEventListener("focus", function () {
+          solHovered = i;
+          solActive = i;
+          updateSolPanels();
+        });
+      });
+
+      solDesktop.onmouseleave = function () {
+        solHovered = null;
+        updateSolPanels();
+      };
+
+      /* Mobile */
+      var slidesHtml = SOLUTIONS.map(function (item, i) {
+        return (
+          '<a href="' + item.href + '" target="_blank" rel="noopener noreferrer" class="sol-slide' + (i === solActive ? " is-active" : "") + '" data-slide="' + i + '"' + (i !== solActive ? ' aria-hidden="true" tabindex="-1"' : "") + ">" +
+            '<img src="' + item.image + '" alt="' + item.description.replace(/"/g, "&quot;") + '" />' +
+            '<div class="sol-slide-overlay"></div>' +
+            '<div class="sol-slide-copy">' +
+              '<p class="sol-num">' + pad(i + 1) + "</p>" +
+              "<h3>" + item.title + "</h3>" +
+              "<p>" + item.description + "</p>" +
+            "</div>" +
+          "</a>"
+        );
+      }).join("");
+
+      var dotsHtml = SOLUTIONS.map(function (item, i) {
+        return '<button type="button" class="sol-dot' + (i === solActive ? " is-active" : "") + '" aria-label="' + item.title + '" data-dot="' + i + '"' + (i === solActive ? ' aria-current="true"' : "") + "></button>";
+      }).join("");
+
+      solMobile.innerHTML =
+        slidesHtml +
+        '<div class="sol-mobile-nav">' +
+          '<div class="sol-dots">' + dotsHtml + "</div>" +
+          '<div class="sol-arrows">' +
+            '<button type="button" aria-label="Previous" id="sol-prev">←</button>' +
+            '<button type="button" aria-label="Next" id="sol-next">→</button>' +
+          "</div>" +
+        "</div>";
+
+      solMobile.querySelectorAll("[data-dot]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          solActive = +btn.getAttribute("data-dot");
+          updateSolMobile();
+        });
+      });
+      document.getElementById("sol-prev").addEventListener("click", function () {
+        solActive = (solActive - 1 + SOLUTIONS.length) % SOLUTIONS.length;
+        updateSolMobile();
+      });
+      document.getElementById("sol-next").addEventListener("click", function () {
+        solActive = (solActive + 1) % SOLUTIONS.length;
+        updateSolMobile();
+      });
     }
-    els.aboutCard.classList.toggle('photo-mode', photoOp > 0.4);
-    // Dead-center once the circle is on screen
-    const cardY = photoOp > 0.4 ? 0 : map(ap, 0, 0.68, 24, 0);
-    els.aboutCard.style.transform = 'translate3d(0,' + cardY + 'px,0)';
 
-    // Founder words
-    revealWords(founderWords, fp, 0.08, 0.72, 0.28, '#FFEC88');
+    function updateSolPanels() {
+      var focus = solFocus();
+      solCurrent.textContent = pad(focus + 1);
+      solDesktop.querySelectorAll(".sol-panel").forEach(function (panel, i) {
+        panel.classList.toggle("is-focus", i === focus);
+        if (i === focus) panel.setAttribute("aria-current", "true");
+        else panel.removeAttribute("aria-current");
+      });
+    }
 
-    // Showcase scale
-    const sRect = els.showcase.getBoundingClientRect();
-    const sProg = clamp(1 - (sRect.top + sRect.height * 0.3) / (window.innerHeight + sRect.height * 0.3), 0, 1);
-    const sScale = map(sProg, 0.15, 0.55, 0.92, 1);
-    els.showcaseFigure.style.transform = 'scale(' + sScale + ')';
+    function updateSolMobile() {
+      solCurrent.textContent = pad(solActive + 1);
+      solMobile.querySelectorAll(".sol-slide").forEach(function (slide, i) {
+        var on = i === solActive;
+        slide.classList.toggle("is-active", on);
+        slide.setAttribute("aria-hidden", on ? "false" : "true");
+        slide.tabIndex = on ? 0 : -1;
+      });
+      solMobile.querySelectorAll(".sol-dot").forEach(function (dot, i) {
+        var on = i === solActive;
+        dot.classList.toggle("is-active", on);
+        if (on) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+    }
 
-    // Logo color
-    const heroH = els.hero.offsetHeight;
-    const yScroll = window.scrollY;
-    const heroDark = yScroll < heroH * 0.22;
-    const fRect = els.founder.getBoundingClientRect();
-    const founderDark = fRect.top < window.innerHeight * 0.45 && fRect.bottom > window.innerHeight * 0.35;
-    els.logoImg.src = (heroDark || founderDark) ? ASSETS.logoWhite : ASSETS.logo;
+    renderSolutions();
 
-    requestAnimationFrame(update);
-  }
+    if (!prefersReducedMotion()) {
+      setInterval(function () {
+        if (solHovered !== null) return;
+        solActive = (solActive + 1) % SOLUTIONS.length;
+        updateSolPanels();
+        updateSolMobile();
+      }, 4200);
+    }
 
-  requestAnimationFrame(update);
-})();
-</script>
+    /* ---- WHY BENEFITS ---- */
+    document.getElementById("benefit-list").innerHTML = BENEFITS.map(function (b, i) {
+      return (
+        '<li data-why-line>' +
+          '<a href="' + ORIGIN + '/About" target="_blank" rel="noopener noreferrer" class="benefit-item">' +
+            '<span class="benefit-num">' + pad(i + 1) + "</span>" +
+            '<span class="benefit-title-wrap">' +
+              '<img src="' + CHECK + '" alt="" width="18" height="18" />' +
+              '<span class="benefit-title">' + b.title + "</span>" +
+            "</span>" +
+            '<span class="benefit-body">' + b.body + "</span>" +
+            '<span class="benefit-arrow" aria-hidden="true">→</span>' +
+          "</a>" +
+        "</li>"
+      );
+    }).join("");
+
+    /* ---- USP ---- */
+    var uspGrid = document.getElementById("usp-grid");
+    function uspItemHtml(item) {
+      return (
+        '<a href="' + ORIGIN + '/Franchise" target="_blank" rel="noopener noreferrer" class="usp-item" data-usp-item>' +
+          '<div class="usp-item-head">' +
+            '<img src="' + CHECK + '" alt="" width="24" height="24" />' +
+            "<h3>" + item.title + "</h3>" +
+          "</div>" +
+          "<p>" + item.body + "</p>" +
+        "</a>"
+      );
+    }
+    uspGrid.innerHTML =
+      '<div class="usp-col">' + USP_ITEMS.slice(0, 2).map(uspItemHtml).join("") + "</div>" +
+      '<div class="usp-img"><img src="' + ORIGIN + '/Content/Website-Image-new/Home%20Page/helium%20solar%20usp.jpeg" alt="Helium Solar" loading="lazy" /></div>' +
+      '<div class="usp-col">' + USP_ITEMS.slice(2).map(uspItemHtml).join("") + "</div>";
+
+    /* ---- PROCESS ---- */
+    var processActive = 0;
+    var processList = document.getElementById("process-steps-list");
+    var processProgress = document.getElementById("process-progress");
+    var processCaptionTitle = document.getElementById("process-caption-title");
+    var processCaptionNum = document.getElementById("process-caption-num");
+
+    function renderProcessSteps() {
+      processList.innerHTML = PROCESS_STEPS.map(function (step, i) {
+        var cls = "process-step";
+        if (i === processActive) cls += " is-active";
+        if (i < processActive) cls += " is-done";
+        return (
+          '<li><a href="' + ORIGIN + '/Enquire" target="_blank" rel="noopener noreferrer" class="' + cls + '" data-step="' + i + '">' +
+            '<span class="process-step-num">' + step.number + "</span>" +
+            '<span class="process-step-title">' + step.title + "</span>" +
+          "</a></li>"
+        );
+      }).join("");
+      processProgress.style.transform = "scaleY(" + ((processActive + 1) / PROCESS_STEPS.length) + ")";
+      processCaptionTitle.textContent = PROCESS_STEPS[processActive].title;
+      processCaptionNum.textContent = PROCESS_STEPS[processActive].number;
+      document.getElementById("process-img").alt = PROCESS_STEPS[processActive].title;
+    }
+    renderProcessSteps();
+
+    function setProcessActive(idx) {
+      if (idx === processActive) return;
+      processActive = idx;
+      renderProcessSteps();
+    }
+
+    /* ---- FINANCING ---- */
+    document.getElementById("loan-steps").innerHTML = LOAN_STEPS.map(function (s) {
+      return (
+        '<article class="loan-step" data-loan-step>' +
+          '<div class="loan-step-img img-zoom"><img src="' + s.image + '" alt="' + s.title + '" loading="lazy" /></div>' +
+          '<div class="loan-step-body">' +
+            "<h3>" + s.title + "</h3>" +
+            "<p>" + s.body + "</p>" +
+            '<a href="' + ORIGIN + '/Enquire" target="_blank" rel="noopener noreferrer">' + s.cta + ' <span class="arr" aria-hidden="true">→</span></a>' +
+          "</div>" +
+        "</article>"
+      );
+    }).join("");
+
+    /* ---- TESTIMONIALS ---- */
+    var testiIndex = 0;
+    var touchX = null;
+
+    function renderTestimonial() {
+      var t = TESTIMONIALS[testiIndex];
+      document.getElementById("testi-img").src = t.image;
+      document.getElementById("testi-img").alt = t.name;
+      document.getElementById("testi-quote").textContent = "“" + t.quote + "”";
+      document.getElementById("testi-name").textContent = t.name;
+      document.getElementById("testi-role").textContent = t.role;
+      document.getElementById("testi-count").textContent = (testiIndex + 1) + " / " + TESTIMONIALS.length;
+      document.getElementById("testi-tabs").innerHTML = TESTIMONIALS.map(function (item, i) {
+        return '<button type="button" role="tab" class="testi-tab' + (i === testiIndex ? " is-active" : "") + '" aria-selected="' + (i === testiIndex) + '" aria-label="' + item.name + '" data-ti="' + i + '"></button>';
+      }).join("");
+      document.querySelectorAll("#testi-tabs [data-ti]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          testiIndex = +btn.getAttribute("data-ti");
+          renderTestimonial();
+        });
+      });
+    }
+    renderTestimonial();
+
+    document.getElementById("testi-prev").addEventListener("click", function () {
+      testiIndex = (testiIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
+      renderTestimonial();
+    });
+    document.getElementById("testi-next").addEventListener("click", function () {
+      testiIndex = (testiIndex + 1) % TESTIMONIALS.length;
+      renderTestimonial();
+    });
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") {
+        testiIndex = (testiIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
+        renderTestimonial();
+      }
+      if (e.key === "ArrowRight") {
+        testiIndex = (testiIndex + 1) % TESTIMONIALS.length;
+        renderTestimonial();
+      }
+    });
+    var testiBody = document.getElementById("testi-body");
+    testiBody.addEventListener("touchstart", function (e) {
+      touchX = e.changedTouches[0] ? e.changedTouches[0].clientX : null;
+    }, { passive: true });
+    testiBody.addEventListener("touchend", function (e) {
+      if (touchX == null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) {
+        if (dx > 0) testiIndex = (testiIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
+        else testiIndex = (testiIndex + 1) % TESTIMONIALS.length;
+        renderTestimonial();
+      }
+      touchX = null;
+    }, { passive: true });
+
+    /* ---- PROJECTS (first 12) ---- */
+    var featured = PROJECTS.slice(0, 5);
+    var rest = PROJECTS.slice(5, 12);
+    var projectsHref = ORIGIN + "/Project";
+
+    document.getElementById("projects-grid").innerHTML = featured.map(function (p) {
+      return (
+        '<a href="' + projectsHref + '" target="_blank" rel="noopener noreferrer" class="project-card" data-project>' +
+          '<div class="img-zoom"><img src="' + p.image + '" alt="' + p.title.replace(/"/g, "&quot;") + '" loading="lazy" /><div class="project-grad"></div></div>' +
+          "<h3>" + p.title + "</h3>" +
+        "</a>"
+      );
+    }).join("");
+
+    document.getElementById("projects-row").innerHTML = rest.map(function (p) {
+      return (
+        '<a href="' + projectsHref + '" target="_blank" rel="noopener noreferrer" class="project-thumb">' +
+          '<div class="img-zoom"><img src="' + p.image + '" alt="' + p.title.replace(/"/g, "&quot;") + '" loading="lazy" /><div class="project-grad"></div></div>' +
+          "<p>" + p.title + "</p>" +
+        "</a>"
+      );
+    }).join("");
+
+    /* ---- INSIGHTS ---- */
+    document.getElementById("insights-grid").innerHTML = INSIGHTS.map(function (post) {
+      return (
+        '<article class="blog-card" data-blog>' +
+          '<a href="' + post.href + '" target="_blank" rel="noopener noreferrer" class="img-zoom">' +
+            '<img src="' + post.image + '" alt="' + post.title.replace(/"/g, "&quot;") + '" loading="lazy" />' +
+          "</a>" +
+          '<div class="blog-meta"><span>' + post.author + '</span><span aria-hidden="true">·</span><time>' + post.date + "</time></div>" +
+          "<h3><a href=\"" + post.href + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + post.title + "</a></h3>" +
+          '<p class="excerpt">' + post.excerpt + "</p>" +
+          '<a href="' + post.href + '" target="_blank" rel="noopener noreferrer" class="read-more">Read More <span class="arr" aria-hidden="true">→</span></a>' +
+        "</article>"
+      );
+    }).join("");
+
+    /* ---- GSAP: Process pin only ---- */
+    function initGsap() {
+      if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+        setTimeout(initGsap, 50);
+        return;
+      }
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (prefersReducedMotion()) {
+        setProcessActive(0);
+        return;
+      }
+
+      var root = document.getElementById("process");
+      var steps = PROCESS_STEPS.length;
+
+      var mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px)", function () {
+        var st = ScrollTrigger.create({
+          trigger: root,
+          start: "top top",
+          end: function () {
+            return "+=" + ((steps - 1) * window.innerHeight * 0.55);
+          },
+          pin: true,
+          scrub: 0.4,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: function (self) {
+            var idx = Math.round(self.progress * (steps - 1));
+            var clamped = Math.min(steps - 1, Math.max(0, idx));
+            setProcessActive(clamped);
+            gsap.set(processProgress, {
+              scaleY: (clamped + 1) / steps
+            });
+          }
+        });
+        requestAnimationFrame(function () { ScrollTrigger.refresh(); });
+        return function () { st.kill(); };
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initGsap);
+    } else {
+      initGsap();
+    }
+  })();
+  </script>
 </body>
 </html>

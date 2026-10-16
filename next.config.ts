@@ -2,11 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Some source PNGs fail the default optimizer; serve originals from heliumsolar.in
+    unoptimized: true,
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "framerusercontent.com",
-      },
       {
         protocol: "https",
         hostname: "www.heliumsolar.in",
@@ -16,15 +14,6 @@ const nextConfig: NextConfig = {
         hostname: "heliumsolar.in",
       },
     ],
-  },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/helium-solar.html",
-        permanent: false,
-      },
-    ];
   },
 };
 

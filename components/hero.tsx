@@ -1,232 +1,133 @@
 "use client";
 
+import Image from "next/image";
+import { useRef } from "react";
+import { HERO } from "@/lib/content";
+import { CtaButton } from "@/components/ui/cta-button";
 import {
-  motion,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { WordReveal } from "@/components/word-reveal";
-import { ASSETS, COPY } from "@/lib/content";
+  gsap,
+  registerGsap,
+  useGSAP,
+  prefersReducedMotion,
+} from "@/lib/motion";
 
-const IMAGE_SOURCES = [
-  ASSETS.services[0].src,
-  ASSETS.services[1].src,
-  ASSETS.services[2].src,
-  ASSETS.services[3].src,
-  ASSETS.services[4].src,
-  ASSETS.services[5].src,
-  ASSETS.gallery[0],
-  ASSETS.gallery[1],
-  ASSETS.gallery[2],
-  ASSETS.gallery[3],
-  ASSETS.gallery[4],
-  ASSETS.gallery[5],
-];
-
-const SIZES = [
-  { w: 210, h: 148 },
-  { w: 176, h: 124 },
-  { w: 196, h: 138 },
-  { w: 158, h: 112 },
-  { w: 188, h: 132 },
-  { w: 168, h: 118 },
-  { w: 200, h: 140 },
-  { w: 150, h: 108 },
-  { w: 182, h: 128 },
-  { w: 164, h: 116 },
-  { w: 192, h: 136 },
-  { w: 170, h: 120 },
-];
-
-type TileData = {
-  src: string;
-  w: number;
-  h: number;
-  angle: number;
-  radiusScale: number;
-};
-
-type Viewport = { w: number; h: number };
-
-function buildTiles(): TileData[] {
-  const count = IMAGE_SOURCES.length;
-  return IMAGE_SOURCES.map((src, index) => {
-    const size = SIZES[index % SIZES.length];
-    // Even 360° spacing — start at top and walk clockwise
-    const angle = (index / count) * Math.PI * 2 - Math.PI / 2;
-    return { src, ...size, angle, radiusScale: 1 };
-  });
-}
-
-function Tile({
-  tile,
-  progress,
-  orbit,
-  viewport,
-  index,
-}: {
-  tile: TileData;
-  progress: MotionValue<number>;
-  orbit: MotionValue<number>;
-  viewport: Viewport;
-  index: number;
-}) {
-  const expand = useTransform(progress, [0.12, 0.38], [0.08, 1]);
-  const opacity = useTransform(progress, [0.1, 0.26, 0.64, 0.8], [0, 1, 1, 0]);
-  const scale = useTransform(progress, [0.1, 0.38], [0.45, 1]);
-
-  // Near-circular ring that still fits the viewport
-  const base = Math.min(viewport.w * 0.36, viewport.h * 0.36, 420) * tile.radiusScale;
-  const radiusX = base * 1.15;
-  const radiusY = base;
-
-  const x = useTransform([expand, orbit], ([spread, spin]) => {
-    const angle = tile.angle + Number(spin);
-    // Offset by half size so cards orbit from their true center
-    return Math.cos(angle) * radiusX * Number(spread) - tile.w / 2;
-  });
-
-  const y = useTransform([expand, orbit], ([spread, spin]) => {
-    const angle = tile.angle + Number(spin);
-    return Math.sin(angle) * radiusY * Number(spread) - tile.h / 2;
-  });
-
-  return (
-    <motion.img
-      src={tile.src}
-      alt=""
-      referrerPolicy="no-referrer"
-      style={{
-        x,
-        y,
-        opacity,
-        scale,
-        width: tile.w,
-        height: tile.h,
-        zIndex: index,
-      }}
-      className="absolute top-1/2 left-1/2 max-w-[38vw] object-cover shadow-[0_18px_40px_rgba(0,0,0,0.12)] md:max-w-none"
-    />
-  );
-}
+registerGsap();
 
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const tiles = useMemo(() => buildTiles(), []);
-  const [viewport, setViewport] = useState<Viewport>({ w: 1440, h: 900 });
-  const orbitRaw = useMotionValue(0);
-  const orbit = useSpring(orbitRaw, { stiffness: 40, damping: 20, mass: 0.6 });
+  const root = useRef<HTMLElement>(null);
+  const slide = HERO.slides[0];
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
+  useGSAP(
+    () => {
+      if (!root.current) return;
+      const reduced = prefersReducedMotion();
+      const words = root.current.querySelectorAll("[data-hero-word]");
+      const img = root.current.querySelector("[data-hero-img]");
+      const rest = root.current.querySelectorAll("[data-hero-fade]");
 
-  useEffect(() => {
-    const update = () => setViewport({ w: window.innerWidth, h: window.innerHeight });
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  useEffect(() => {
-    let frame = 0;
-    let last = performance.now();
-
-    const tick = (now: number) => {
-      const delta = (now - last) / 1000;
-      last = now;
-      const p = scrollYProgress.get();
-      if (p > 0.12 && p < 0.82) {
-        orbitRaw.set(orbitRaw.get() + delta * 0.18);
+      if (reduced) {
+        gsap.set([words, rest, img], { clearProps: "all", opacity: 1, y: 0, scale: 1 });
+        return;
       }
-      frame = requestAnimationFrame(tick);
-    };
 
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [orbitRaw, scrollYProgress]);
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.fromTo(
+        img,
+        { scale: 1.12, opacity: 0.6 },
+        { scale: 1, opacity: 1, duration: 1.6 },
+        0,
+      )
+        .fromTo(
+          words,
+          { yPercent: 120, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 0.85, stagger: 0.045 },
+          0.2,
+        )
+        .fromTo(
+          rest,
+          { y: 24, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 },
+          0.55,
+        );
 
-  const photoOpacity = useTransform(scrollYProgress, [0.16, 0.36], [1, 0]);
-  const photoScale = useTransform(scrollYProgress, [0, 0.36], [1, 1.08]);
-  const glow = useTransform(scrollYProgress, [0, 0.3], [0.25, 0.7]);
-  const yellow = useTransform(scrollYProgress, [0.14, 0.34], [0, 1]);
-  const headlineY = useTransform(scrollYProgress, [0, 0.2], [0, -24]);
-  const headlineOpacity = useTransform(scrollYProgress, [0.08, 0.24], [1, 0]);
-  const statementOpacity = useTransform(
-    scrollYProgress,
-    [0.32, 0.42, 0.64, 0.76],
-    [0, 1, 1, 0],
+      gsap.to(img, {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    },
+    { scope: root },
   );
-  const finalOpacity = useTransform(scrollYProgress, [0.72, 0.88], [0, 1]);
-  const finalY = useTransform(scrollYProgress, [0.72, 0.9], [28, 0]);
+
+  const words = slide.title.split(" ");
 
   return (
-    <section id="hero" ref={ref} className="relative h-[520vh]">
-      <div className="sticky top-0 h-screen overflow-hidden bg-white">
-        <motion.div style={{ opacity: yellow }} className="absolute inset-0 bg-solar" />
-
-        <motion.div style={{ opacity: photoOpacity, scale: photoScale }} className="absolute inset-0">
-          <img
-            src={ASSETS.heroSlides[0]}
+    <section
+      ref={root}
+      className="relative flex min-h-[100svh] items-end overflow-hidden bg-brand-deep text-white"
+      aria-label="Hero"
+    >
+      <div className="absolute inset-0" aria-hidden>
+        <div data-hero-img className="absolute inset-0 will-change-transform">
+          <Image
+            src={slide.image}
             alt=""
-            referrerPolicy="no-referrer"
-            className="h-full w-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
-          <motion.div
-            style={{ opacity: glow }}
-            className="pointer-events-none absolute inset-x-0 top-0 h-[42%] bg-[radial-gradient(ellipse_at_top,rgba(11,79,156,0.35),transparent_68%)]"
-          />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/45 to-transparent" />
-        </motion.div>
-
-        <div className="pointer-events-none absolute inset-0 z-10">
-          {tiles.map((tile, index) => (
-            <Tile
-              key={tile.src}
-              tile={tile}
-              progress={scrollYProgress}
-              orbit={orbit}
-              viewport={viewport}
-              index={index}
-            />
-          ))}
         </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep via-brand-deep/55 to-brand-deep/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-deep/70 via-transparent to-transparent" />
+      </div>
 
-        <motion.h1
-          style={{ opacity: headlineOpacity, y: headlineY }}
-          className="absolute right-5 bottom-9 left-5 z-20 max-w-[920px] text-[27px] leading-none font-semibold tracking-[-0.065em] text-white md:text-[32px] lg:text-[38px]"
-        >
-          <span className="block">{COPY.heroLine1}</span>
-          <span className="block text-white/85">{COPY.heroLine2.trim()}</span>
-        </motion.h1>
+      <div className="container-wide relative z-10 w-full pb-16 pt-40 md:pb-24 md:pt-48">
+        <h1 className="font-display max-w-4xl text-[clamp(2.4rem,6vw,5.2rem)] font-semibold leading-[1.05] tracking-tight">
+          {words.map((word, i) => (
+            <span key={`${word}-${i}`} className="inline-block overflow-hidden align-bottom">
+              <span data-hero-word className="inline-block will-change-transform">
+                {word}
+                {i < words.length - 1 ? "\u00A0" : null}
+              </span>
+            </span>
+          ))}
+        </h1>
 
-        <motion.div
-          style={{ opacity: statementOpacity }}
-          className="absolute inset-0 z-20 flex items-center justify-center px-6"
+        <p
+          data-hero-fade
+          className="mt-6 max-w-xl text-base leading-relaxed text-white/85 md:text-lg"
         >
-          <div className="w-full max-w-[920px] rounded-[18px] border border-black/5 bg-[rgba(255,252,235,0.88)] px-6 py-5 shadow-[0_20px_60px_rgba(14,14,14,0.08)] backdrop-blur-md md:px-11 md:py-9">
-            <WordReveal
-              text={COPY.statement}
-              progress={scrollYProgress}
-              start={0.34}
-              end={0.62}
-              dim={0.28}
-              className="text-center font-display text-[18px] leading-[1.25] font-semibold tracking-[-0.02em] text-ink md:text-[26px] lg:text-[34px]"
-            />
-          </div>
-        </motion.div>
+          {slide.body}
+        </p>
 
-        <motion.h2
-          style={{ opacity: finalOpacity, y: finalY }}
-          className="absolute inset-0 z-20 flex items-center justify-center px-6 text-center font-display text-[28px] leading-[1.02] font-medium tracking-[-0.03em] text-ink md:text-[44px] lg:text-[64px]"
-        >
-          {COPY.final}
-        </motion.h2>
+        <div data-hero-fade className="mt-10 flex flex-wrap items-center gap-4">
+          <CtaButton href={HERO.ctaPrimary.href} variant="light">
+            {HERO.ctaPrimary.label}
+          </CtaButton>
+          <a
+            href={HERO.ctaVideo.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 border-b border-white/40 pb-1 text-sm text-white/90 transition-colors hover:border-accent hover:text-accent"
+          >
+            {HERO.ctaVideo.label}
+          </a>
+        </div>
+      </div>
+
+      <div
+        data-hero-fade
+        className="motion-safe-only absolute bottom-8 right-6 hidden flex-col items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-white/60 md:flex"
+        aria-hidden
+      >
+        <span>Scroll</span>
+        <span className="scroll-indicator-dot block h-8 w-px bg-white/50" />
       </div>
     </section>
   );
