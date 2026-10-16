@@ -11,3 +11,5 @@ helium-solar.zip
 
 public/videos/helium-founder.mp4
 *.mp4.bak
+
+.vercel
