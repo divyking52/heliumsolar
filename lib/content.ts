@@ -1,10 +1,21 @@
-/** Exact content & assets sourced from https://www.heliumsolar.in/ — do not invent copy. */
+/** Exact content & assets sourced from https://www.heliumsolar.in/ — do not invent copy.
+ *  Image srcs resolve to Storebox CDN (see lib/storebox-media.ts).
+ */
+
+import { storeboxUrl } from "@/lib/storebox-media";
 
 const ORIGIN = "https://www.heliumsolar.in";
 
+/** Storebox CDN URL for a heliumsolar media path; falls back to local public path. */
 export function media(path: string): string {
   if (path.startsWith("http")) return path;
-  return `${ORIGIN}${path.startsWith("/") ? path : `/${path}`}`;
+  const cdn = storeboxUrl(path);
+  if (cdn) return cdn;
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return normalized
+    .split("/")
+    .map((segment, i) => (i === 0 || segment === "" ? segment : encodeURIComponent(segment)))
+    .join("/");
 }
 
 export function pageUrl(path: string): string {

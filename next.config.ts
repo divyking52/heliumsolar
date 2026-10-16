@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "cdn.storebox.ai",
+      },
+      {
+        protocol: "https",
+        hostname: "admin.storebox.ai",
+      },
+      {
+        protocol: "https",
         hostname: "www.heliumsolar.in",
       },
       {
